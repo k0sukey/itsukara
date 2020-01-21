@@ -31,7 +31,7 @@ rimraf.sync('public');
 mkdirp.sync('public');
 
 const date = new Date();
-fs.writeFileSync(path.join('public', 'index.html'), `Last updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`);
+fs.writeFileSync(path.join('public', 'index.html'), `Last updated: ${date.toString()}`);
 
 (async () => {
   try {
