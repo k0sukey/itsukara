@@ -14,7 +14,7 @@ jobs:
           paths:
             - node_modules
       - run:
-          command: npx netlify deploy -p -o -s ${NETLIFY_APP_ID} -a ${NETLIFY_ACCESS_TOKEN}
+          command: npx netlify deploy -p -d public -s ${NETLIFY_APP_ID} -a ${NETLIFY_ACCESS_TOKEN}
 workflows:
   version: 2
   onetime:
