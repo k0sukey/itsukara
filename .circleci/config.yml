@@ -17,6 +17,9 @@ jobs:
           command: npx netlify deploy -p -o -s ${NETLIFY_APP_ID} -a ${NETLIFY_ACCESS_TOKEN}
 workflows:
   version: 2
+  onetime:
+    jobs:
+      - build
   nightly:
     triggers:
       - schedule:
