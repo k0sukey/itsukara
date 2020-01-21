@@ -30,6 +30,9 @@ interface Response {
 rimraf.sync('public');
 mkdirp.sync('public');
 
+const date = new Date();
+fs.writeFileSync(path.join('public', 'index.html'), `Last updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`);
+
 (async () => {
   try {
     const response = await got('https://api.itsukaralink.jp/v1.2/events.json');

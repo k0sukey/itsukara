@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  netlify_deploy:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: deploy
+          command: npx netlify deploy -p -o -s ${NETLIFY_APP_ID} -a ${NETLIFY_ACCESS_TOKEN}
+
+workflows:
+  version: 2
+    nightly:
+      triggers:
+          - schedule:
+            cron: "0 1 * * *"
+            filters:
+              branches:
+                only:
+                  - master
+      jobs:
+        - netlify_deploy
