@@ -1,11 +1,20 @@
 version: 2
 jobs:
-  netlify_deploy:
+  build:
     docker:
       - image: circleci/node:10
     steps:
       - checkout
-      - run: npx netlify deploy -p -o -s ${NETLIFY_APP_ID} -a ${NETLIFY_ACCESS_TOKEN}
+      - restore_cache:
+          key: dependencies-{{ checksum "package.json" }}
+      - run:
+          command: npm i
+      - save_cache:
+          key: dependencies-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          command: npx netlify deploy -p -o -s ${NETLIFY_APP_ID} -a ${NETLIFY_ACCESS_TOKEN}
 workflows:
   version: 2
   nightly:
@@ -17,4 +26,4 @@ workflows:
               only:
                 - master
     jobs:
-      - netlify_deploy
+      - build
