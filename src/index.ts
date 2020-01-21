@@ -39,6 +39,8 @@ fs.writeFileSync(path.join('public', 'index.html'), `Last updated: ${date.toStri
     const cal = ical({
       domain: 'https://www.itsukaralink.jp/',
       name: 'いつから.link',
+      timezone: 'Asia/Tokyo',
+      ttl: 60 * 60 * 24,
     });
 
     const json = JSON.parse(response.body) as Response;
@@ -50,6 +52,7 @@ fs.writeFileSync(path.join('public', 'index.html'), `Last updated: ${date.toStri
         summary: event.name,
         description: `${livers}\n\n${event.description}`,
         url: event.url,
+        timezone: 'Asia/Tokyo',
       });
     });
 
