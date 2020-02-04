@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: circleci/node:latest-browsers
         environment:
+          TZ: Asia/Tokyo
           NODE_ENV: development
     steps:
       - checkout
