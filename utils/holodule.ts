@@ -1,8 +1,8 @@
+import fs from 'fs';
 import ical from 'ical-generator';
 import mkdirp from 'mkdirp';
+import path from 'path';
 import puppeteer from 'puppeteer';
-import fs from "fs";
-import path from "path";
 
 mkdirp.sync('public');
 
@@ -16,7 +16,9 @@ interface Event {
 }
 
 (async () => {
-  const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   const page = await browser.newPage();
   await page.goto('https://schedule.hololive.tv/', {
     waitUntil: 'networkidle0',
