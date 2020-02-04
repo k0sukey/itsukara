@@ -24,27 +24,24 @@ body {
 }
 
 .card.is-wide {
-  width: 550px;
-}
-
-.card.has-text-centered {
-  .card-header,
-  .card-content,
-  .card-footer {
-    justify-content: center;
-    align-items: center;
-  }
+  max-width: 340px;
 }
 
 .card-header {
+  justify-content: center;
+  align-items: center;
   padding: 1.75rem 0;
 }
 
 .card-content {
+  justify-content: center;
+  align-items: center;
   padding: 3.5rem 2rem;
 }
 
 .card-footer {
+  justify-content: center;
+  align-items: center;
   padding: 1rem 0;
   border: none;
   font-size: .9rem;
@@ -118,10 +115,10 @@ window.addEventListener('DOMContentLoaded', () => {
               </div>
             </div>
             <div class="control">
-              <img src="https://api.netlify.com/api/v1/badges/05f95ea1-c925-4e99-99d5-3975b5c9a310/deploy-status">
+              <img src="https://circleci.com/gh/k0sukey/itsukara.svg?style=svg">
             </div>
             <div class="control">
-              <img src="https://circleci.com/gh/k0sukey/itsukara.svg?style=svg">
+              <img src="https://api.netlify.com/api/v1/badges/05f95ea1-c925-4e99-99d5-3975b5c9a310/deploy-status">
             </div>
           </div>
 
