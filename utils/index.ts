@@ -78,11 +78,11 @@ fetch('/holodule.ics').then(function(response){
           <dl>
             <dt class="has-text-left">にじさんじ</dt>
             <dd>
-              更新：<a id="itsukara" href="/itsukara.ics">date: Tue, 04 Feb 2020 02:10:00 GMT</a>
+              更新：<a id="itsukara" href="/itsukara.ics"></a>
             </dd>
             <dt class="has-text-left">ホロライブ</dt>
             <dd>
-              更新：<a id="itsukara" href="/holodule.ics">date: Tue, 04 Feb 2020 02:10:00 GMT</a>
+              更新：<a id="itsukara" href="/holodule.ics"></a>
             </dd>
           </dl>
         </div>
