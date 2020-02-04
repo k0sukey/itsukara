@@ -62,22 +62,26 @@ const onError = error => {
 window.addEventListener('DOMContentLoaded', () => {
   fetch('/itsukara.ics').then(response => {
     if (response.status >= 200 && response.status < 300) {
-      const matched = response.text().match(/X-WR-CALDESC:(.+)/ig)[0].replace('X-WR-CALDESC:', '');
-      const el = document.querySelector('#itsukara');
-      el.textContent = new Date(matched).toLocaleString();
+      return response.text();
     } else {
       throw new Error(response.statusText)
     }
+  }).then(text => {
+      const matched = text.match(/X-WR-CALDESC:(.+)/ig)[0].replace('X-WR-CALDESC:', '');
+      const el = document.querySelector('#itsukara');
+      el.textContent = new Date(matched).toLocaleString();
   }).catch(onError);
 
   fetch('/holodule.ics').then(response => {
     if (response.status >= 200 && response.status < 300) {
-      const matched = response.text().match(/X-WR-CALDESC:(.+)/ig)[0].replace('X-WR-CALDESC:', '');
-      const el = document.querySelector('#holodule');
-      el.textContent = new Date(matched).toLocaleString();
+      return response.text();
     } else {
       throw new Error(response.statusText)
     }
+  }).then(text => {
+      const matched = text.match(/X-WR-CALDESC:(.+)/ig)[0].replace('X-WR-CALDESC:', '');
+      const el = document.querySelector('#holodule');
+      el.textContent = new Date(matched).toLocaleString();
   }).catch(onError);
 });
     </script>
