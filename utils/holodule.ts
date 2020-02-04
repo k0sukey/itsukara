@@ -8,8 +8,8 @@ mkdirp.sync('public');
 
 interface Event {
   name: string;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   url: string;
   summary: string;
   description: string;
@@ -78,9 +78,7 @@ interface Event {
       return;
     }
     const [mm, dd] = v.holodule.split('/');
-    const start = new Date(
-      // Date.now() + (new Date().getTimezoneOffset() + 9 * 60) * 60 * 1000,
-    );
+    const start = new Date();
     start.setMonth(parseInt(mm, 10) - 1, parseInt(dd, 10));
 
     v.list.forEach(w => {
@@ -91,9 +89,10 @@ interface Event {
       start.setHours(parseInt(hh, 10), parseInt(mm, 10), 0, 0);
       const end = new Date(start);
       end.setHours(start.getHours() + 1);
+      end.toJSON()
       _events.push({
-        start,
-        end,
+        start: start.toJSON(),
+        end: end.toJSON(),
         name: w.name,
         url: w.href,
         summary: '',
@@ -124,10 +123,9 @@ interface Event {
   });
 
   events.forEach(event => {
-    console.log(event.start.toString(), event.end.toString());
     cal.createEvent({
-      start: event.start,
-      end: event.end,
+      start: new Date(event.start),
+      end: new Date(event.end),
       summary: event.summary,
       description: `${event.name}\n\n${event.description}`,
       url: event.url,
