@@ -78,7 +78,9 @@ interface Event {
       return;
     }
     const [mm, dd] = v.holodule.split('/');
-    const start = new Date();
+    const start = new Date(
+      // Date.now() + (new Date().getTimezoneOffset() + 9 * 60) * 60 * 1000,
+    );
     start.setMonth(parseInt(mm, 10) - 1, parseInt(dd, 10));
 
     v.list.forEach(w => {
@@ -89,6 +91,7 @@ interface Event {
       start.setHours(parseInt(hh, 10), parseInt(mm, 10), 0, 0);
       const end = new Date(start);
       end.setHours(start.getHours() + 1);
+      console.log(w.datetime, start.toString(), end.toString());
       _events.push({
         start,
         end,
