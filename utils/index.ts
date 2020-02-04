@@ -53,13 +53,22 @@ body {
     <title>配信スケジュール</title>
     <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/whatwg-fetch@3.0.0/dist/fetch.umd.min.js"></script>
     <script type="text/javascript">
-fetch('/itsukara.ics', { method: 'HEAD' }).then(function(response){
-  const el = document.querySelector('#itsukara');
-  el.textContent = new Date(response.headers.get('Date')).toLocaleString();
-});
-fetch('/holodule.ics', { method: 'HEAD' }).then(function(response){
-  const el = document.querySelector('#holodule');
-  el.textContent = new Date(response.headers.get('Date')).toLocaleString();
+const onError = error => {
+  const el = document.querySelector('#error');
+  el.textContent = error.message;
+  el.parentElement.style.display = 'block';
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+  fetch('/itsukara.ics', { method: 'HEAD' }).then(response => {
+    const el = document.querySelector('#itsukara');
+    el.textContent = new Date(response.headers.get('Date')).toLocaleString();
+  }).catch(onError);
+
+  fetch('/holodule.ics', { method: 'HEAD' }).then(response => {
+    const el = document.querySelector('#holodule');
+    el.textContent = new Date(response.headers.get('Date')).toLocaleString();
+  }).catch(onError);
 });
     </script>
   </head>
@@ -72,18 +81,26 @@ fetch('/holodule.ics', { method: 'HEAD' }).then(function(response){
               <div class="tags has-addons">
                 <span class="tag is-dark">
                   <span class="ion-calendar"></span>
-                  <span style="margin-left: 6px;">にじさんじ</span>
+                  <span style="margin-left: 6px; font-weight: bold;">にじさんじ</span>
                 </span>
-                <a class="tag is-info" id="itsukara" href="/itsukara.ics"></a>
+                <a class="tag is-info" id="itsukara" href="/itsukara.ics">----/--/-- --:--:--</a>
               </div>
             </div>
             <div class="control">
               <div class="tags has-addons">
                 <span class="tag is-dark">
                   <span class="ion-calendar"></span>
-                  <span style="margin-left: 6px;">ホロライブ</span>
+                  <span style="margin-left: 6px; font-weight: bold;">ホロライブ</span>
                 </span>
-                <a class="tag is-info" id="holodule" href="/holodule.ics"></a>
+                <a class="tag is-info" id="holodule" href="/holodule.ics">----/--/-- --:--:--</a>
+              </div>
+            </div>
+            <div class="control is-small">
+              <div class="tags has-addons">
+                <span class="tag is-dark">
+                  <span class="ion-social-github"></span>
+                </span>
+                <a class="tag is-light" href="https://github.com/k0sukey/itsukara" style="font-weight: bold;">Repository</a>
               </div>
             </div>
             <div class="control">
@@ -93,6 +110,8 @@ fetch('/holodule.ics', { method: 'HEAD' }).then(function(response){
               <img src="https://circleci.com/gh/k0sukey/itsukara.svg?style=svg">
             </div>
           </div>
+
+          <div class="notification is-danger" style="display: none; margin-top: 20px;"><span id="error"></span></div>
         </div>
 
         <footer class="card-footer" style="display: block;">
