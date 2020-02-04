@@ -118,6 +118,7 @@ interface Event {
   const cal = ical({
     domain: 'https://vigilant-bartik-6c4b01.netlify.com/',
     name: 'ホロジュール.ics',
+    description: new Date().toJSON(),
     timezone: 'Asia/Tokyo',
     ttl: 60 * 60 * 24,
   });

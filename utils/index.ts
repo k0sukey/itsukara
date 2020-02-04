@@ -60,14 +60,16 @@ const onError = error => {
 };
 
 window.addEventListener('DOMContentLoaded', () => {
-  fetch('/itsukara.ics', { method: 'HEAD' }).then(response => {
+  fetch('/itsukara.ics').then(response => {
+    const matched = response.text().match(/X-WR-CALDESC:(.+)/ig)[0].replace('X-WR-CALDESC:', '');
     const el = document.querySelector('#itsukara');
-    el.textContent = new Date(response.headers.get('Date')).toLocaleString();
+    el.textContent = new Date(matched).toLocaleString();
   }).catch(onError);
 
-  fetch('/holodule.ics', { method: 'HEAD' }).then(response => {
+  fetch('/holodule.ics').then(response => {
+    const matched = response.text().match(/X-WR-CALDESC:(.+)/ig)[0].replace('X-WR-CALDESC:', '');
     const el = document.querySelector('#holodule');
-    el.textContent = new Date(response.headers.get('Date')).toLocaleString();
+    el.textContent = new Date(matched).toLocaleString();
   }).catch(onError);
 });
     </script>

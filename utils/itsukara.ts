@@ -34,6 +34,7 @@ mkdirp.sync('public');
     const cal = ical({
       domain: 'https://vigilant-bartik-6c4b01.netlify.com/',
       name: 'いつから.ics',
+      description: new Date().toJSON(),
       timezone: 'Asia/Tokyo',
       ttl: 60 * 60 * 24,
     });
