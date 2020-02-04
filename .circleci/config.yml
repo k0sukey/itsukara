@@ -20,6 +20,30 @@ jobs:
           command: npm run build
       - run:
           command: npx netlify deploy --prod --site ${NETLIFY_APP_ID} --auth ${NETLIFY_ACCESS_TOKEN}
+  calendar:
+    docker:
+      - image: circleci/node:latest-browsers
+        environment:
+          TZ: Asia/Tokyo
+          NODE_ENV: development
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependencies-{{ checksum "package.json" }}
+      - run:
+          command: npm i
+      - save_cache:
+          key: dependencies-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          command: npm run calendar:itsukara
+      - run:
+          command: npm run calendar:holodule
+      - run:
+          command: npm run build
+      - run:
+          command: npx netlify deploy --prod --site ${NETLIFY_APP_ID} --auth ${NETLIFY_ACCESS_TOKEN}
 workflows:
   version: 2
   onetime:
@@ -34,4 +58,4 @@ workflows:
               only:
                 - master
     jobs:
-      - build
+      - calendar

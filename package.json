@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run calendar:index && npm run calendar:itsukara && npm run calendar:holodule",
+    "build": "npm run calendar:index",
     "build:next": "next build",
     "calendar:index": "ts-node -P tsconfig.calendar.json utils/index.ts",
     "calendar:itsukara": "ts-node -P tsconfig.calendar.json utils/itsukara.ts",
