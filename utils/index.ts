@@ -78,7 +78,7 @@ fetch('/holodule.ics').then(function(response){
             </dd>
             <dt class="has-text-left" style="padding-left: 60px;">ホロライブ</dt>
             <dd>
-              更新：<a id="itsukara" href="/holodule.ics"></a>
+              更新：<a id="holodule" href="/holodule.ics"></a>
             </dd>
           </dl>
         </div>
