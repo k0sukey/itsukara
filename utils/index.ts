@@ -72,7 +72,7 @@ fetch('/holodule.ics', { method: 'HEAD' }).then(function(response){
                   <span class="ion-calendar"></span>
                   <span style="margin-left: 6px;">にじさんじ</span>
                 </span>
-                <a class="tag is-info" id="itsukara" href="/itsukara.ics">2020/2/4 15:14:17</a>
+                <a class="tag is-info" id="itsukara" href="/itsukara.ics"></a>
               </div>
             </div>
             <div class="control">
@@ -81,7 +81,7 @@ fetch('/holodule.ics', { method: 'HEAD' }).then(function(response){
                   <span class="ion-calendar"></span>
                   <span style="margin-left: 6px;">ホロライブ</span>
                 </span>
-                <a class="tag is-info" id="holodule" href="/holodule.ics">2020/2/4 15:14:17</a>
+                <a class="tag is-info" id="holodule" href="/holodule.ics"></a>
               </div>
             </div>
             <div class="control">
