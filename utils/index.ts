@@ -36,10 +36,6 @@ body {
     font-size: 1.75rem;
     font-weight: bold;
   }
-
-  dt {
-    padding-left: 60px;
-  }
 }
 
 .card-header {
@@ -76,11 +72,11 @@ fetch('/holodule.ics').then(function(response){
         <div class="card-content">
           <h1>配信スケジュール.ics</h1>
           <dl>
-            <dt class="has-text-left">にじさんじ</dt>
+            <dt class="has-text-left" style="padding-left: 60px;">にじさんじ</dt>
             <dd>
               更新：<a id="itsukara" href="/itsukara.ics"></a>
             </dd>
-            <dt class="has-text-left">ホロライブ</dt>
+            <dt class="has-text-left" style="padding-left: 60px;">ホロライブ</dt>
             <dd>
               更新：<a id="itsukara" href="/holodule.ics"></a>
             </dd>
