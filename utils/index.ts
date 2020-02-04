@@ -9,6 +9,7 @@ const html = `<!DOCTYPE html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/kokoro.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <style>
@@ -19,6 +20,7 @@ body {
   width: 100%;
   align-items: center;
   justify-content: center;
+  font-family: "Kokoro";
 }
 
 .card.is-wide {
