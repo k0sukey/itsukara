@@ -91,7 +91,6 @@ interface Event {
       start.setHours(parseInt(hh, 10), parseInt(mm, 10), 0, 0);
       const end = new Date(start);
       end.setHours(start.getHours() + 1);
-      console.log(w.datetime, start.toString(), end.toString());
       _events.push({
         start,
         end,
@@ -125,6 +124,7 @@ interface Event {
   });
 
   events.forEach(event => {
+    console.log(event.start.toString(), event.end.toString());
     cal.createEvent({
       start: event.start,
       end: event.end,
