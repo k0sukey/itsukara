@@ -14,7 +14,11 @@ jobs:
           paths:
             - node_modules
       - run:
-          command: npm run build
+          command: npm run calendar:itsukara
+      - run:
+          command: npm run calendar:holodule
+      - run:
+          command: npm run calendar:index
       - run:
           command: npx netlify deploy --prod --site ${NETLIFY_APP_ID} --auth ${NETLIFY_ACCESS_TOKEN}
 workflows:

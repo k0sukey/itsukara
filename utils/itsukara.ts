@@ -3,7 +3,6 @@ import got from 'got';
 import ical from 'ical-generator';
 import mkdirp from 'mkdirp';
 import path from 'path';
-import rimraf from 'rimraf';
 
 interface Liver {
   name: string;
@@ -27,18 +26,14 @@ interface Response {
   data: Data;
 }
 
-rimraf.sync('public');
 mkdirp.sync('public');
-
-const date = new Date();
-fs.writeFileSync(path.join('public', 'index.html'), `Last updated: ${date.toString()}`);
 
 (async () => {
   try {
     const response = await got('https://api.itsukaralink.jp/v1.2/events.json');
     const cal = ical({
-      domain: 'https://www.itsukaralink.jp/',
-      name: 'いつから.link',
+      domain: 'https://vigilant-bartik-6c4b01.netlify.com/',
+      name: 'いつから.ics',
       timezone: 'Asia/Tokyo',
       ttl: 60 * 60 * 24,
     });

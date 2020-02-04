@@ -1,3 +1,5 @@
 .idea
+.next
 public
 node_modules
+out
