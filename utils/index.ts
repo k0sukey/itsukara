@@ -61,15 +61,23 @@ const onError = error => {
 
 window.addEventListener('DOMContentLoaded', () => {
   fetch('/itsukara.ics').then(response => {
-    const matched = response.text().match(/X-WR-CALDESC:(.+)/ig)[0].replace('X-WR-CALDESC:', '');
-    const el = document.querySelector('#itsukara');
-    el.textContent = new Date(matched).toLocaleString();
+    if (response.status >= 200 && response.status < 300) {
+      const matched = response.text().match(/X-WR-CALDESC:(.+)/ig)[0].replace('X-WR-CALDESC:', '');
+      const el = document.querySelector('#itsukara');
+      el.textContent = new Date(matched).toLocaleString();
+    } else {
+      throw new Error(response.statusText)
+    }
   }).catch(onError);
 
   fetch('/holodule.ics').then(response => {
-    const matched = response.text().match(/X-WR-CALDESC:(.+)/ig)[0].replace('X-WR-CALDESC:', '');
-    const el = document.querySelector('#holodule');
-    el.textContent = new Date(matched).toLocaleString();
+    if (response.status >= 200 && response.status < 300) {
+      const matched = response.text().match(/X-WR-CALDESC:(.+)/ig)[0].replace('X-WR-CALDESC:', '');
+      const el = document.querySelector('#holodule');
+      el.textContent = new Date(matched).toLocaleString();
+    } else {
+      throw new Error(response.statusText)
+    }
   }).catch(onError);
 });
     </script>
