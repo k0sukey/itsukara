@@ -103,7 +103,7 @@ interface Event {
   const events: Event[] = [];
   for (let i = 0; i < _events.length; i++) {
     await page.goto(_events[i].url, {
-      waitUntil: 'networkidle0',
+      waitUntil: ['load', 'networkidle2'],
     });
 
     const json = await page.evaluate(() =>
