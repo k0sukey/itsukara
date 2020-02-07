@@ -41,12 +41,12 @@ mkdirp.sync('public');
 
     const json = JSON.parse(response.body) as Response;
     json.data.events.forEach(event => {
-      const livers = event.livers.map(liver => liver.name).join('\n');
+      const [liver] = event.livers;
       cal.createEvent({
         start: new Date(event.start_date),
         end: new Date(event.end_date),
         summary: event.name,
-        description: `${livers}\n\n${event.description}`,
+        description: `${liver.name} / ${event.url}\n\n${event.description}`,
         url: event.url,
         timezone: 'Asia/Tokyo',
       });

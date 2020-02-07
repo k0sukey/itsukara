@@ -128,7 +128,7 @@ interface Event {
       start: new Date(event.start),
       end: new Date(event.end),
       summary: event.summary,
-      description: `${event.name}\n\n${event.description}`,
+      description: `${event.name} / ${event.url}\n\n${event.description}`,
       url: event.url,
       timezone: 'Asia/Tokyo',
     });
