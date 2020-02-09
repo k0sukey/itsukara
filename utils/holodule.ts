@@ -85,11 +85,11 @@ interface Event {
       if (w === null) {
         return null;
       }
+
       const [hh, mm] = w.datetime.split(':');
       start.setHours(parseInt(hh, 10), parseInt(mm, 10), 0, 0);
       const end = new Date(start);
       end.setHours(start.getHours() + 1);
-      end.toJSON()
       _events.push({
         start: start.toJSON(),
         end: end.toJSON(),
@@ -103,8 +103,20 @@ interface Event {
 
   const events: Event[] = [];
   for (let i = 0; i < _events.length; i++) {
+    const label = `fetch ${_events[i].url}`;
+    console.time(label);
+
     await page.goto(_events[i].url, {
       waitUntil: ['load', 'networkidle2'],
+    });
+    await page.waitForFunction(() => {
+      try {
+        return !!JSON.parse(
+          (window as any).ytplayer.config.args.player_response,
+        );
+      } catch {
+        return false;
+      }
     });
 
     const json = await page.evaluate(() =>
@@ -113,6 +125,8 @@ interface Event {
     const summary = json.videoDetails.title;
     const description = json.videoDetails.shortDescription;
     events.push({ ..._events[i], summary, description });
+
+    console.timeEnd(label);
   }
 
   const cal = ical({
