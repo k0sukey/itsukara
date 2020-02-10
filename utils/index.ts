@@ -52,6 +52,10 @@ body {
 .modal {
   font-family: "Sawarabi Mincho";
 }
+
+.modal-content {
+  max-height: calc(100vh - 240px);
+}
     </style>
     <title>配信スケジュール.ics</title>
     <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/whatwg-fetch@3.0.0/dist/fetch.umd.min.js"></script>
