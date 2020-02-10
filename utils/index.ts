@@ -54,7 +54,7 @@ body {
 }
 
 .modal-content {
-  max-height: calc(100vh - 240px);
+  max-width: 340px;
 }
     </style>
     <title>配信スケジュール.ics</title>
@@ -159,6 +159,7 @@ function onCloseAbout() {
       <div class="modal-background"></div>
       <div class="modal-content">
         <div class="box">
+          <button class="button is-fullwidth" style="margin-bottom: 20px;" onclick="onCloseAbout()">閉じる</button>
           <p>
             <span class="ion-calendar"></span> このサイトは、にじさんじ・ホロライブの非公式スケジュール配信サイトです。
             <a href="https://www.itsukaralink.jp">いつから.link</a>と<a href="https://schedule.hololive.tv">ホロジュール</a>から 1 時間に 1 度情報を取得して、<a href="https://ja.wikipedia.org/wiki/ICalendar">iCalendar</a> 形式の <a href="/itsukara.ics">itsukara.ics</a> と <a href="/holodule.ics">holodule.ics</a> を自動生成しています。
@@ -179,7 +180,6 @@ function onCloseAbout() {
           </ul>
         </div>
       </div>
-      <button class="modal-close is-large" onclick="onCloseAbout()"></button>
     </div>
   </body>
 </html>
