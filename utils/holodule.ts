@@ -109,26 +109,30 @@ interface Event {
     await page.goto(_events[i].url, {
       waitUntil: ['load', 'networkidle0'],
     });
-    await page.waitForFunction(() => {
-      try {
-        return !!JSON.parse(
-          (window as any).ytplayer.config.args.player_response,
-        );
-      } catch {
-        return false;
-      }
-    }).catch(e => {
-      if (e instanceof puppeteer.errors.TimeoutError) {
-        console.timeEnd(label);
-      }
+    await page
+      .waitForFunction(() => {
+        try {
+          return !!JSON.parse(
+            (window as any).ytplayer.config.args.player_response,
+          );
+        } catch {
+          return false;
+        }
+      })
+      .catch(e => {
+        if (e instanceof puppeteer.errors.TimeoutError) {
+          console.timeEnd(label);
+        }
+      });
 
-      console.error(e);
-      process.exit(1);
-    });
-
-    const json = await page.evaluate(() =>
-      JSON.parse((window as any).ytplayer.config.args.player_response),
-    );
+    const json = await page
+      .evaluate(() =>
+        JSON.parse((window as any).ytplayer.config.args.player_response),
+      )
+      .catch(e => {
+        console.error(e);
+        process.exit(1);
+      });
     const summary = json.videoDetails.title;
     const description = json.videoDetails.shortDescription;
     events.push({ ..._events[i], summary, description });
