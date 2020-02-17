@@ -30,9 +30,16 @@ mkdirp.sync('public');
 
 (async () => {
   try {
-    const response = await got('https://api.itsukaralink.jp/v1.2/events.json');
+    const response = await got(
+      'https://api.itsukaralink.jp/v1.2/events.json',
+    ).catch(e => {
+      console.error(e);
+      process.exit(1);
+    });
+
     const cal = ical({
       domain: 'https://vigilant-bartik-6c4b01.netlify.com/',
+      url: 'https://vigilant-bartik-6c4b01.netlify.com/itsukara.ics',
       name: 'いつから.ics',
       description: new Date().toJSON(),
       timezone: 'Asia/Tokyo',

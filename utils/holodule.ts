@@ -117,6 +117,13 @@ interface Event {
       } catch {
         return false;
       }
+    }).catch(e => {
+      if (e instanceof puppeteer.errors.TimeoutError) {
+        console.timeEnd(label);
+      }
+
+      console.error(e);
+      process.exit(1);
     });
 
     const json = await page.evaluate(() =>
@@ -131,6 +138,7 @@ interface Event {
 
   const cal = ical({
     domain: 'https://vigilant-bartik-6c4b01.netlify.com/',
+    url: 'https://vigilant-bartik-6c4b01.netlify.com/holodule.ics',
     name: 'ホロジュール.ics',
     description: new Date().toJSON(),
     timezone: 'Asia/Tokyo',
