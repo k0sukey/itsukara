@@ -3,16 +3,14 @@ import unfetch from 'isomorphic-unfetch';
 import { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import CheckIcon from '@material-ui/icons/Check';
-import WarningIcon from '@material-ui/icons/Warning';
+import IconButton from '@material-ui/core/IconButton';
 import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -22,6 +20,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import CheckIcon from '@material-ui/icons/Check';
+import HelpIcon from '@material-ui/icons/Help';
+import WarningIcon from '@material-ui/icons/Warning';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 type Box = 'itsukara' | 'holodule';
 
@@ -74,7 +77,7 @@ const IndexPage: NextPage = () => {
         <Grid item>
           <Card style={{ minWidth: 340, maxWidth: 340 }}>
             <CardHeader
-              title="スケジュール.ics"
+              title="配信スケジュール.ics"
               subheader={
                 <Typography color="textSecondary">
                   Unofficial live stream schedule based on{' '}
@@ -127,11 +130,14 @@ const IndexPage: NextPage = () => {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary="にじさんじ"
+                    primary={<Box fontWeight="bold">にじさんじ</Box>}
+                    primaryTypographyProps={{ color: 'textPrimary' }}
                     secondary={
-                      itsukara === null
-                        ? '----/--/-- --:--'
-                        : itsukara.toLocaleString()
+                      itsukara === null ? (
+                        <Skeleton animation="wave" />
+                      ) : (
+                        itsukara.toLocaleString()
+                      )
                     }
                   />
                 </ListItem>
@@ -147,11 +153,14 @@ const IndexPage: NextPage = () => {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary="ホロライブ"
+                    primary={<Box fontWeight="bold">ホロライブ</Box>}
+                    primaryTypographyProps={{ color: 'textPrimary' }}
                     secondary={
-                      holodule === null
-                        ? '----/--/-- --:--'
-                        : holodule.toLocaleString()
+                      holodule === null ? (
+                        <Skeleton animation="wave" />
+                      ) : (
+                        holodule.toLocaleString()
+                      )
                     }
                   />
                 </ListItem>
@@ -166,9 +175,13 @@ const IndexPage: NextPage = () => {
                 src="https://api.netlify.com/api/v1/badges/05f95ea1-c925-4e99-99d5-3975b5c9a310/deploy-status"
                 alt="netlify"
               />
-              <Button onClick={handleOpen} style={{ marginLeft: 'auto' }}>
-                このサイトはなに？
-              </Button>
+              <IconButton
+                color="primary"
+                onClick={handleOpen}
+                style={{ marginLeft: 'auto' }}
+              >
+                <HelpIcon />
+              </IconButton>
             </CardActions>
           </Card>
         </Grid>

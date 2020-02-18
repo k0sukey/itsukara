@@ -20,7 +20,7 @@ export default class MyApp extends App {
     return (
       <>
         <Head>
-          <title>スケジュール.ics</title>
+          <title>配信スケジュール.ics</title>
         </Head>
         <Component {...pageProps} />
       </>
