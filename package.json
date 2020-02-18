@@ -10,6 +10,7 @@
     "calendar:itsukara": "ts-node -P tsconfig.calendar.json utils/itsukara.ts",
     "calendar:holodule": "ts-node -P tsconfig.calendar.json utils/holodule.ts",
     "dev": "next",
+    "deploy": "npm run build:next && npm run export",
     "export": "next export",
     "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1"

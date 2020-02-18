@@ -21,8 +21,6 @@ jobs:
       - run:
           command: npm run calendar:holodule
       - run:
-          command: npm run build
-      - run:
           command: npx netlify deploy --prod --site ${NETLIFY_APP_ID} --auth ${NETLIFY_ACCESS_TOKEN}
   calendar:
     docker:
@@ -44,8 +42,6 @@ jobs:
           command: npm run calendar:itsukara
       - run:
           command: npm run calendar:holodule
-      - run:
-          command: npm run build
       - run:
           command: npx netlify deploy --prod --site ${NETLIFY_APP_ID} --auth ${NETLIFY_ACCESS_TOKEN}
 workflows:
