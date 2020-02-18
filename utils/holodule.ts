@@ -107,7 +107,7 @@ interface Event {
     console.time(label);
 
     await page.goto(_events[i].url, {
-      waitUntil: ['load', 'networkidle0'],
+      waitUntil: ['load', 'networkidle2'],
     });
     await page
       .waitForFunction(() => {
