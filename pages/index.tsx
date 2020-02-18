@@ -1,7 +1,7 @@
 import ical from 'ical.js';
 import unfetch from 'isomorphic-unfetch';
 import { NextPage } from 'next';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -23,15 +23,36 @@ import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-interface Props {
-  itsukara: string;
-  holodule: string;
-}
+type Box = 'itsukara' | 'holodule';
 
-const IndexPage: NextPage<Props> = props => {
+const IndexPage: NextPage = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
-  const itsukara = new Date(props.itsukara);
-  const holodule = new Date(props.holodule);
+  const [itsukara, setItsukara] = useState<Date | null>(null);
+  const [holodule, setHolodule] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const getLastModified = async (box: Box, url: string): Promise<void> => {
+      const response = await unfetch(url);
+      const plain = await response.text();
+      const parsed = ical.parse(plain);
+      const component = new ical.Component(parsed);
+      const description = component.getFirstPropertyValue('x-wr-caldesc');
+      if (box === 'itsukara') {
+        setItsukara(new Date(description));
+      }
+      if (box === 'holodule') {
+        setHolodule(new Date(description));
+      }
+    };
+    getLastModified(
+      'itsukara',
+      'https://vigilant-bartik-6c4b01.netlify.com/itsukara.ics',
+    );
+    getLastModified(
+      'holodule',
+      'https://vigilant-bartik-6c4b01.netlify.com/holodule.ics',
+    );
+  }, []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -51,19 +72,43 @@ const IndexPage: NextPage<Props> = props => {
         style={{ minHeight: '100vh' }}
       >
         <Grid item>
-          <Card style={{ minWidth: 400, maxWidth: 400 }}>
+          <Card style={{ minWidth: 340, maxWidth: 340 }}>
             <CardHeader
               title="スケジュール.ics"
               subheader={
                 <Typography color="textSecondary">
                   Unofficial live stream schedule based on{' '}
-                  <Link href="https://nijisanji.ichikara.co.jp/">
+                  <Link
+                    color="textSecondary"
+                    style={{ fontSize: '0.85rem' }}
+                    href="https://nijisanji.ichikara.co.jp/"
+                  >
                     にじさんじ
                   </Link>
                   (
-                  <Link href="https://www.itsukaralink.jp/">いつから.link</Link>
-                  ) and <Link href="https://www.hololive.tv/">ホロライブ</Link>(
-                  <Link href="https://schedule.hololive.tv/">ホロジュール</Link>
+                  <Link
+                    color="textSecondary"
+                    style={{ fontSize: '0.85rem' }}
+                    href="https://www.itsukaralink.jp/"
+                  >
+                    いつから.link
+                  </Link>
+                  ) and{' '}
+                  <Link
+                    color="textSecondary"
+                    style={{ fontSize: '0.85rem' }}
+                    href="https://www.hololive.tv/"
+                  >
+                    ホロライブ
+                  </Link>
+                  (
+                  <Link
+                    color="textSecondary"
+                    style={{ fontSize: '0.85rem' }}
+                    href="https://schedule.hololive.tv/"
+                  >
+                    ホロジュール
+                  </Link>
                   ).
                 </Typography>
               }
@@ -83,7 +128,11 @@ const IndexPage: NextPage<Props> = props => {
                   </ListItemAvatar>
                   <ListItemText
                     primary="にじさんじ"
-                    secondary={itsukara.toLocaleString()}
+                    secondary={
+                      itsukara === null
+                        ? '----/--/-- --:--'
+                        : itsukara.toLocaleString()
+                    }
                   />
                 </ListItem>
                 <ListItem
@@ -99,7 +148,11 @@ const IndexPage: NextPage<Props> = props => {
                   </ListItemAvatar>
                   <ListItemText
                     primary="ホロライブ"
-                    secondary={holodule.toLocaleString()}
+                    secondary={
+                      holodule === null
+                        ? '----/--/-- --:--'
+                        : holodule.toLocaleString()
+                    }
                   />
                 </ListItem>
               </List>
@@ -130,7 +183,7 @@ const IndexPage: NextPage<Props> = props => {
         }}
       >
         <Paper
-          style={{ width: 360, height: 400, overflowY: 'scroll', padding: 20 }}
+          style={{ width: 300, height: 400, overflowY: 'scroll', padding: 20 }}
         >
           <Typography>
             このサイトは、にじさんじ・ホロライブの非公式スケジュール配信サイトです。
@@ -249,7 +302,9 @@ const IndexPage: NextPage<Props> = props => {
               <ListItemText
                 primary={
                   <Typography style={{ fontSize: '0.85rem' }}>
-                    何かありましたら <Link href="https://twitter.com/k0sukey">k0sukey</Link> までどうぞ
+                    何かありましたら{' '}
+                    <Link href="https://twitter.com/k0sukey">k0sukey</Link>{' '}
+                    までどうぞ
                   </Typography>
                 }
               />
@@ -259,27 +314,6 @@ const IndexPage: NextPage<Props> = props => {
       </Modal>
     </>
   );
-};
-
-IndexPage.getInitialProps = async () => {
-  const getLastModified = async (url: string): Promise<string> => {
-    const response = await unfetch(url);
-    const plain = await response.text();
-    const parsed = ical.parse(plain);
-    const component = new ical.Component(parsed);
-    return component.getFirstPropertyValue('x-wr-caldesc');
-  };
-  const itsukara = await getLastModified(
-    'https://vigilant-bartik-6c4b01.netlify.com/itsukara.ics',
-  );
-  const holodule = await getLastModified(
-    'https://vigilant-bartik-6c4b01.netlify.com/holodule.ics',
-  );
-
-  return {
-    itsukara,
-    holodule,
-  };
 };
 
 export default IndexPage;

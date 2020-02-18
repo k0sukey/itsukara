@@ -9,7 +9,7 @@ import queryString from 'query-string';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 
-import Layout from '../components/Layout';
+import Layout from './Layout';
 
 interface Props {
   videoIds: string[];
