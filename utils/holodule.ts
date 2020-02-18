@@ -112,9 +112,7 @@ interface Event {
     await page
       .waitForFunction(() => {
         try {
-          return !!JSON.parse(
-            (window as any).ytplayer.config.args.player_response,
-          );
+          return !!(window as any).ytplayer;
         } catch {
           return false;
         }
@@ -125,19 +123,33 @@ interface Event {
         }
       });
 
-    const json = await page
-      .evaluate(() =>
-        JSON.parse((window as any).ytplayer.config.args.player_response),
-      )
-      .catch(e => {
-        console.error(e);
-        process.exit(1);
+    const checker = await page.evaluate(
+      () => (window as any).ytInitialPlayerResponse,
+    ).catch(e => {
+      console.error(e);
+      console.timeEnd(label);
+    });
+    if (checker.playabilityStatus.status !== 'UNPLAYABLE') {
+      const json = await page
+        .evaluate(() =>
+          JSON.parse((window as any).ytplayer.config.args.player_response),
+        )
+        .catch(e => {
+          console.error(e);
+          console.timeEnd(label);
+        });
+      const summary = json.videoDetails.title;
+      const description = json.videoDetails.shortDescription;
+      events.push({ ..._events[i], summary, description });
+      console.timeEnd(label);
+    } else {
+      events.push({
+        ..._events[i],
+        summary: `${checker.videoDetails.title}`,
+        description: `${checker.videoDetails.shortDescription}`,
       });
-    const summary = json.videoDetails.title;
-    const description = json.videoDetails.shortDescription;
-    events.push({ ..._events[i], summary, description });
-
-    console.timeEnd(label);
+      console.error(`${label}: ${checker.playabilityStatus.reason}`);
+    }
   }
 
   const cal = ical({
