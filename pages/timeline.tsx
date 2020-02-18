@@ -2,8 +2,6 @@ import ical from 'ical.js';
 import unfetch from 'isomorphic-unfetch';
 import { NextPage } from 'next';
 import React from 'react';
-import ContainerDimensions from 'react-container-dimensions';
-import YouTube from 'react-youtube';
 import {
   VerticalTimeline,
   VerticalTimelineElement,
