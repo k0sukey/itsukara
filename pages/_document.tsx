@@ -16,12 +16,11 @@ export default class MyDocument extends Document {
               body {
                 margin: 0;
                 padding: 0;
-                background-color: #ffffff;
               }
             `}
           </style>
         </Head>
-        <body>
+        <body style={{ margin: 0, padding: 0 }}>
           <Main></Main>
           <NextScript></NextScript>
         </body>
