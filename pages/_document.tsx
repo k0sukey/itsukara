@@ -11,6 +11,7 @@ export default class MyDocument extends Document {
             name="viewport"
             content="initial-scale=1.0, width=device-width"
           />
+          <meta name="description" content="にじさんじ・ホロライブの非公式スケジュール配信サイトです。" />
           <style jsx global>
             {`
               body {
