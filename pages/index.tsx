@@ -34,10 +34,9 @@ const IndexPage: NextPage = () => {
   const [itsukara, setItsukara] = useState<Date | null>(null);
   const [holodule, setHolodule] = useState<Date | null>(null);
 
-  setTimeout(() => {
+  useEffect(() => {
     setLoaded(true);
-  }, 2000);
-
+  }, [itsukara, holodule]);
   useEffect(() => {
     const getLastModified = async (
       boxType: BoxType,
