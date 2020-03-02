@@ -6,24 +6,15 @@ export default class MyDocument extends Document {
     return (
       <Html lang="ja">
         <Head>
-          <meta charSet="utf-8" />
+          <title>配信スケジュール.ics</title>
           <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
+            name="description"
+            content="にじさんじ・ホロライブの非公式スケジュール配信サイトです。"
           />
-          <meta name="description" content="にじさんじ・ホロライブの非公式スケジュール配信サイトです。" />
-          <style jsx global>
-            {`
-              body {
-                margin: 0;
-                padding: 0;
-              }
-            `}
-          </style>
         </Head>
         <body style={{ margin: 0, padding: 0 }}>
-          <Main></Main>
-          <NextScript></NextScript>
+          <Main />
+          <NextScript />
         </body>
       </Html>
     );

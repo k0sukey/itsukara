@@ -1,5 +1,4 @@
 import App, { AppContext } from 'next/app';
-import Head from 'next/head';
 import React from 'react';
 
 export default class MyApp extends App {
@@ -15,14 +14,6 @@ export default class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props;
-
-    return (
-      <>
-        <Head>
-          <title>配信スケジュール.ics</title>
-        </Head>
-        <Component {...pageProps} />
-      </>
-    );
+    return <Component {...pageProps} />;
   }
 }
