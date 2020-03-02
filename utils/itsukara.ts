@@ -3,6 +3,7 @@ import got from 'got';
 import ical from 'ical-generator';
 import mkdirp from 'mkdirp';
 import path from 'path';
+import queryString from 'query-string';
 
 interface Liver {
   name: string;
@@ -44,11 +45,17 @@ mkdirp.sync('public');
       description: new Date().toJSON(),
       timezone: 'Asia/Tokyo',
       ttl: 60 * 60 * 24,
+      prodId: {
+        company: 'スケジュール.ics',
+        product: 'いつから.ics',
+        language: 'JA',
+      },
     });
 
     const json = JSON.parse(response.body) as Response;
     json.data.events.forEach(event => {
       const [liver] = event.livers;
+      const parsed = queryString.parse(event.url.split('?')[1]);
       cal.createEvent({
         start: new Date(event.start_date),
         end: new Date(event.end_date),
@@ -56,6 +63,7 @@ mkdirp.sync('public');
         description: `${liver.name} / ${event.url}\n\n${event.description}`,
         url: event.url,
         timezone: 'Asia/Tokyo',
+        uid: parsed.v ? parsed.v as string : undefined,
       });
     });
 

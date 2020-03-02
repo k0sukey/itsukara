@@ -3,6 +3,7 @@ import ical from 'ical-generator';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import puppeteer from 'puppeteer';
+import queryString from 'query-string';
 
 mkdirp.sync('public');
 
@@ -159,9 +160,15 @@ interface Event {
     description: new Date().toJSON(),
     timezone: 'Asia/Tokyo',
     ttl: 60 * 60 * 24,
+    prodId: {
+      company: 'スケジュール.ics',
+      product: 'ホロジュール.ics',
+      language: 'JA',
+    },
   });
 
   events.forEach(event => {
+    const parsed = queryString.parse(event.url.split('?')[1]);
     cal.createEvent({
       start: new Date(event.start),
       end: new Date(event.end),
@@ -169,6 +176,7 @@ interface Event {
       description: `${event.name} / ${event.url}\n\n${event.description}`,
       url: event.url,
       timezone: 'Asia/Tokyo',
+      uid: parsed.v ? parsed.v as string : undefined,
     });
   });
 
