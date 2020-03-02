@@ -11,6 +11,7 @@ export default class MyDocument extends Document {
             name="description"
             content="にじさんじ・ホロライブの非公式スケジュール配信サイトです。"
           />
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         </Head>
         <body style={{ margin: 0, padding: 0 }}>
           <Main />

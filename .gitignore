@@ -1,5 +1,5 @@
 .idea
 .next
-public
+public/*.ics
 node_modules
 out

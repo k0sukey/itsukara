@@ -86,7 +86,7 @@ const IndexPage: NextPage = () => {
                     color="textPrimary"
                     style={{ fontSize: '1.5rem' }}
                   >
-                    <ScheduleIcon fontSize="small" /> 配信スケジュール.ics
+                    <ScheduleIcon fontSize="default" /> 配信スケジュール.ics
                   </Typography>
                 }
                 subheader={
