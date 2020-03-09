@@ -54,6 +54,7 @@ mkdirp.sync('public');
 
     const json = JSON.parse(response.body) as Response;
     json.data.events.forEach(event => {
+      console.info(event.url);
       const [liver] = event.livers;
       const parsed = queryString.parse(event.url.split('?')[1]);
       cal.createEvent({
