@@ -1,6 +1,7 @@
 import fs from 'fs';
 import got from 'got';
 import ical from 'ical-generator';
+import unfetch from 'isomorphic-unfetch';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import queryString from 'query-string';
@@ -31,15 +32,13 @@ mkdirp.sync('public');
 
 (async () => {
   try {
-    const response = await got('https://api.itsukaralink.jp/v1.2/events.json', {
-      headers: {
-        'user-agent':
-          '"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"',
-      },
-    }).catch(e => {
+    /* const response = await got(
+      'https://api.itsukaralink.jp/v1.2/events.json',
+    ).catch(e => {
       console.error(e);
       process.exit(1);
-    });
+    }); */
+    const response = await unfetch('https://api.itsukaralink.jp/v1.2/events.json');
 
     const cal = ical({
       domain: 'https://vigilant-bartik-6c4b01.netlify.com/',
@@ -55,7 +54,7 @@ mkdirp.sync('public');
       },
     });
 
-    const json = JSON.parse(response.body) as Response;
+    const json = JSON.parse(await response.text()) as Response;
     json.data.events.forEach(event => {
       console.info(event.url);
       const [liver] = event.livers;
