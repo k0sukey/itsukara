@@ -29,7 +29,9 @@ interface Response {
 
 mkdirp.sync('public');
 
+console.info('outside async');
 (async () => {
+  console.info('inside async');
   try {
     const response = await got(
       'https://api.itsukaralink.jp/v1.2/events.json',
@@ -37,7 +39,6 @@ mkdirp.sync('public');
       console.error(e);
       process.exit(1);
     });
-    console.info(response);
 
     const cal = ical({
       domain: 'https://vigilant-bartik-6c4b01.netlify.com/',
