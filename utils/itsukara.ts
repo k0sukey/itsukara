@@ -29,13 +29,14 @@ interface Response {
 
 mkdirp.sync('public');
 
-console.info('outside async');
 (async () => {
-  console.info('inside async');
   try {
-    const response = await got(
-      'https://api.itsukaralink.jp/v1.2/events.json',
-    ).catch(e => {
+    const response = await got('https://api.itsukaralink.jp/v1.2/events.json', {
+      headers: {
+        'user-agent':
+          '"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"',
+      },
+    }).catch(e => {
       console.error(e);
       process.exit(1);
     });
@@ -66,7 +67,7 @@ console.info('outside async');
         description: `${liver.name} / ${event.url}\n\n${event.description}`,
         url: event.url,
         timezone: 'Asia/Tokyo',
-        uid: parsed.v ? parsed.v as string : undefined,
+        uid: parsed.v ? (parsed.v as string) : undefined,
       });
     });
 
