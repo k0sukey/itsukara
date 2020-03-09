@@ -224,7 +224,7 @@ const IndexPage: NextPage = () => {
             <Link href="/holodule.ics">holodule.ics</Link>{' '}
             を自動生成しています。 配信されている .ics は、お使いの PC
             やスマートフォンのアプリに読み込ませて自由にご利用ください。
-            配信者個別のスケジュールが欲しい方は<a href="/nijisanji">}こちら</a>
+            配信者個別のスケジュールが欲しい方は<a href="/nijisanji">こちら</a>
             からどうぞ。
           </Typography>
           <Divider style={{ marginTop: 10 }} />
