@@ -1,4 +1,7 @@
+import fs from 'fs';
+import path from 'path';
 import puppeteer from 'puppeteer';
+import URLParse from 'url-parse';
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -31,7 +34,17 @@ import puppeteer from 'puppeteer';
     });
     return livers;
   });
-  console.log(data);
+
+  const json = data.map(v => {
+    const parsed = URLParse(v.channel);
+    return {
+      name: v.name,
+      thumbnail: v.thumbnail,
+      channelId: parsed.pathname.replace('/channel/', '')
+    }
+  });
+
+  await fs.writeFileSync(path.join('utils', 'nijisanji.json'), JSON.stringify(json));
 
   await browser.close();
 })();

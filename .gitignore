@@ -1,5 +1,6 @@
 .idea
 .next
-public/*.ics
+public/**/*.ics
+public/**/*.json
 node_modules
 out
