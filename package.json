@@ -9,6 +9,7 @@
     "calendar:index": "ts-node -P tsconfig.calendar.json utils/index.ts",
     "calendar:itsukara": "ts-node -P tsconfig.calendar.json utils/itsukara.ts",
     "calendar:holodule": "ts-node -P tsconfig.calendar.json utils/holodule.ts",
+    "talent:nijisanji": "ts-node -P tsconfig.calendar.json utils/liver.ts",
     "dev": "next",
     "deploy": "npm run build:next && npm run export",
     "export": "next export",
@@ -51,6 +52,7 @@
     "@types/react-vertical-timeline-component": "^2.5.0",
     "@types/react-youtube": "^7.6.2",
     "@types/rimraf": "^2.0.3",
+    "@types/url-parse": "^1.4.3",
     "got": "^10.2.2",
     "ical-generator": "^1.9.2",
     "mkdirp": "^0.5.1",
@@ -59,6 +61,7 @@
     "puppeteer": "^2.1.0",
     "rimraf": "^3.0.0",
     "ts-node": "^8.6.2",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "url-parse": "^1.4.7"
   }
 }
