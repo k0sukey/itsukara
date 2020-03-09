@@ -37,6 +37,7 @@ mkdirp.sync('public');
       console.error(e);
       process.exit(1);
     });
+    console.info(response);
 
     const cal = ical({
       domain: 'https://vigilant-bartik-6c4b01.netlify.com/',
@@ -53,7 +54,6 @@ mkdirp.sync('public');
     });
 
     const json = JSON.parse(response.body) as Response;
-    console.info(`data count of ${json.data.events.length}`);
     json.data.events.forEach(event => {
       console.info(event.url);
       const [liver] = event.livers;
