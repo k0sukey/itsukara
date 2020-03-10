@@ -5,7 +5,10 @@ import path from 'path';
 import puppeteer from 'puppeteer';
 import queryString from 'query-string';
 
+import livers from './hololive.json';
+
 mkdirp.sync('public');
+mkdirp.sync('public/holodule');
 
 interface Event {
   name: string;
@@ -124,12 +127,12 @@ interface Event {
         }
       });
 
-    const checker = await page.evaluate(
-      () => (window as any).ytInitialPlayerResponse,
-    ).catch(e => {
-      console.error(e);
-      console.timeEnd(label);
-    });
+    const checker = await page
+      .evaluate(() => (window as any).ytInitialPlayerResponse)
+      .catch(e => {
+        console.error(e);
+        console.timeEnd(label);
+      });
     if (checker.playabilityStatus.status !== 'UNPLAYABLE') {
       const json = await page
         .evaluate(() =>
@@ -176,11 +179,53 @@ interface Event {
       description: `${event.name} / ${event.url}\n\n${event.description}`,
       url: event.url,
       timezone: 'Asia/Tokyo',
-      uid: parsed.v ? parsed.v as string : undefined,
+      uid: parsed.v ? (parsed.v as string) : undefined,
     });
   });
 
   await fs.writeFileSync(path.join('public', 'holodule.ics'), cal.toString());
+
+  for (let i = 0; i < livers.length; i++) {
+    const liver = livers[i];
+    const cal = ical({
+      domain: 'https://vigilant-bartik-6c4b01.netlify.com/',
+      url: `https://vigilant-bartik-6c4b01.netlify.com/holodule/${liver.channelId}.ics`,
+      name: `${liver.name} ホロジュール.ics`,
+      description: new Date().toJSON(),
+      timezone: 'Asia/Tokyo',
+      ttl: 60 * 60 * 24,
+      prodId: {
+        company: 'スケジュール.ics',
+        product: `${liver.name} ホロジュール.ics`,
+        language: 'JA',
+      },
+    });
+
+    events
+      .filter(event => event.name === liver.name)
+      .forEach(event => {
+        const parsed = queryString.parse(event.url.split('?')[1]);
+        cal.createEvent({
+          start: new Date(event.start),
+          end: new Date(event.end),
+          summary: event.summary,
+          description: `${event.name} / ${event.url}\n\n${event.description}`,
+          url: event.url,
+          timezone: 'Asia/Tokyo',
+          uid: parsed.v ? (parsed.v as string) : undefined,
+        });
+      });
+
+    await fs.writeFileSync(
+      path.join('public', 'holodule', `${liver.channelId}.ics`),
+      cal.toString(),
+    );
+  }
+
+  await fs.writeFileSync(
+    path.join('public', 'hololive.json'),
+    JSON.stringify(livers),
+  );
 
   await browser.close();
 })();

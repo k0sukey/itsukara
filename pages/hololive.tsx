@@ -25,7 +25,7 @@ const NijisanjiPage: NextPage = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await unfetch('nijisanji.json');
+      const response = await unfetch('hololive.json');
       const plain = await response.text();
       const json = JSON.parse(plain);
       setLivers(json);
@@ -75,7 +75,7 @@ const NijisanjiPage: NextPage = () => {
                 button
                 component={Link}
                 underline="none"
-                href={`/itsukara/${liver.channelId}.ics`}
+                href={`/holodule/${liver.channelId}.ics`}
               >
                 <ListItemAvatar>
                   <Avatar alt={liver.name} src={liver.thumbnail} />

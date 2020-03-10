@@ -16,6 +16,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
@@ -152,6 +153,22 @@ const IndexPage: NextPage = () => {
                       }
                     />
                   </ListItem>
+                  <ListItem
+                    button
+                    component={Link}
+                    underline="none"
+                    href="/nijisanji"
+                  >
+                    <ListItemText
+                      inset
+                      style={{ textAlign: 'right' }}
+                      primary="個別スケジュール"
+                      primaryTypographyProps={{
+                        color: 'textPrimary',
+                        style: { fontSize: '0.85rem' },
+                      }}
+                    />
+                  </ListItem>
                   <Divider light variant="inset" />
                   <ListItem
                     button
@@ -178,6 +195,22 @@ const IndexPage: NextPage = () => {
                           holodule.toLocaleString()
                         )
                       }
+                    />
+                  </ListItem>
+                  <ListItem
+                    button
+                    component={Link}
+                    underline="none"
+                    href="/hololive"
+                  >
+                    <ListItemText
+                      inset
+                      style={{ textAlign: 'right' }}
+                      primary="個別スケジュール"
+                      primaryTypographyProps={{
+                        color: 'textPrimary',
+                        style: { fontSize: '0.85rem' },
+                      }}
                     />
                   </ListItem>
                 </List>
@@ -224,8 +257,6 @@ const IndexPage: NextPage = () => {
             <Link href="/holodule.ics">holodule.ics</Link>{' '}
             を自動生成しています。 配信されている .ics は、お使いの PC
             やスマートフォンのアプリに読み込ませて自由にご利用ください。
-            配信者個別のスケジュールが欲しい方は<a href="/nijisanji">こちら</a>
-            からどうぞ。
           </Typography>
           <Divider style={{ marginTop: 10 }} />
           <List dense>
