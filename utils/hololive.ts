@@ -32,9 +32,12 @@ interface Response {
       return {
         name: product.name,
         thumbnail: product.picture[0].thumbnailUrl,
-        channelId: parsed.pathname.replace('/channel/', ''),
+        channelId: parsed.pathname.replace('/channel/', '').replace(/\/$/, ''),
       };
     });
 
-  await fs.writeFileSync(path.join('utils', 'hololive.json'), JSON.stringify(talents));
+  await fs.writeFileSync(
+    path.join('utils', 'hololive.json'),
+    JSON.stringify(talents),
+  );
 })();
