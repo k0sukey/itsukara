@@ -19,7 +19,7 @@ interface Liver {
   thumbnail: string;
 }
 
-const NijisanjiPage: NextPage = () => {
+const HololivePage: NextPage = () => {
   const [livers, setLivers] = useState<Array<Liver>>([]);
   const [keyword, setKeyword] = useState<string>('');
 
@@ -95,4 +95,4 @@ const NijisanjiPage: NextPage = () => {
   );
 };
 
-export default NijisanjiPage;
+export default HololivePage;

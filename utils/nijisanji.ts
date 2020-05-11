@@ -40,11 +40,14 @@ import URLParse from 'url-parse';
     return {
       name: v.name,
       thumbnail: v.thumbnail,
-      channelId: parsed.pathname.replace('/channel/', '')
-    }
+      channelId: parsed.pathname.replace('/channel/', ''),
+    };
   });
 
-  await fs.writeFileSync(path.join('utils', 'nijisanji.json'), JSON.stringify(json));
+  await fs.writeFileSync(
+    path.join('utils', 'nijisanji.json'),
+    JSON.stringify(json),
+  );
 
   await browser.close();
 })();
