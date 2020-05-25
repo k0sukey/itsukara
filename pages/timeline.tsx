@@ -95,8 +95,8 @@ const TimelinePage: NextPage = () => {
 
     (async () => {
       setTalents([
-        ...(await getTalents('./nijisanji.json')),
-        ...(await getTalents('./hololive.json')),
+        ...(await getTalents('nijisanji.json')),
+        ...(await getTalents('hololive.json')),
       ]);
     })();
   }, []);
