@@ -139,7 +139,10 @@ interface Event {
         console.error(e);
         console.timeEnd(label);
       });
-    if (checker.playabilityStatus.status !== 'UNPLAYABLE') {
+    if (
+      checker.playabilityStatus.status !== 'UNPLAYABLE' &&
+      checker.playabilityStatus.status !== 'ERROR'
+    ) {
       const json = await page
         .evaluate(() =>
           JSON.parse((window as any).ytplayer.config.args.player_response),
