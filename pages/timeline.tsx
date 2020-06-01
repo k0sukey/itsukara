@@ -1,6 +1,7 @@
 import ical from 'ical.js';
 import unfetch from 'isomorphic-unfetch';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import React, { useEffect, useRef, useState } from 'react';
 import ContainerDimensions from 'react-container-dimensions';
 import { ListChildComponentProps, VariableSizeList } from 'react-window';
@@ -298,6 +299,9 @@ const TimelinePage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>タイムライン</title>
+      </Head>
       <CssBaseline />
       <div
         ref={containerRef}
