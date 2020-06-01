@@ -122,7 +122,7 @@ const TimelinePage: NextPage = () => {
       if (v.itemType === 'event') {
         return false;
       }
-      return Date.parse(v.start) > now;
+      return Date.parse(`${v.start}+09:00`) > now;
     });
     listRef.current.scrollToItem(foundIndex, 'start');
   };
@@ -162,7 +162,6 @@ const TimelinePage: NextPage = () => {
         ...(await getEvents('holodule.ics')),
       ].map(event => {
         const json = event.toJSON();
-        console.log(json);
         return {
           uid: json[1][0][3],
           start: json[1][3][3],
