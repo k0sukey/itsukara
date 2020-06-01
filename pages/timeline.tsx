@@ -1,19 +1,21 @@
 import ical from 'ical.js';
 import unfetch from 'isomorphic-unfetch';
 import { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ContainerDimensions from 'react-container-dimensions';
+import { ListChildComponentProps, VariableSizeList } from 'react-window';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import IconButton from '@material-ui/core/IconButton';
+import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 import ScheduleIcon from '@material-ui/icons/Schedule';
-import YouTubeIcon from '@material-ui/icons/YouTube';
+import UpdateIcon from '@material-ui/icons/Update';
 
 interface Talent {
   name: string;
@@ -30,26 +32,35 @@ interface Event {
   url: string;
 }
 
-interface Timeline {
-  [start: string]: Event[];
-}
+type TimelineItem = Event & {
+  itemType: 'full' | 'short' | 'event';
+};
 
-function getTimeline(events: Event[]): Timeline {
-  return events.reduce((acc, cur) => {
-    acc[cur.start] = acc[cur.start] ? [...acc[cur.start], cur] : [cur];
-    return acc;
-  }, {} as Timeline);
-}
-
-function getDateTime(curr: string, prev: string | ''): string {
+function getDateTime(curr: string, prev: string): TimelineItem {
   const [currDate, currTime] = curr.split('T');
   const [hour, minute] = currTime.split(':');
-  const prevDate = prev.split('T')[0];
-  if (currDate === prevDate) {
-    return `${hour}:${minute}`;
+  if (currDate === prev.split('T')[0]) {
+    return {
+      itemType: 'short',
+      uid: curr,
+      start: curr,
+      end: '',
+      summary: `${hour}:${minute}`,
+      description: '',
+      url: '',
+    };
   }
+
   const [year, month, date] = currDate.split('-');
-  return `${year}年${month}月${date}日 ${hour}:${minute}`;
+  return {
+    itemType: 'full',
+    uid: curr,
+    start: curr,
+    end: '',
+    summary: `${year}年${month}月${date}日 ${hour}:${minute}`,
+    description: '',
+    url: '',
+  };
 }
 
 function getAvatar(talents: Talent[], description: string): any {
@@ -60,6 +71,9 @@ function getAvatar(talents: Talent[], description: string): any {
       alt={name}
       src={found.thumbnail}
       style={{
+        position: 'absolute',
+        top: '20px',
+        left: 0,
         width: '54px',
         height: '54px',
         marginRight: '24px',
@@ -69,6 +83,9 @@ function getAvatar(talents: Talent[], description: string): any {
   ) : (
     <Avatar
       style={{
+        position: 'absolute',
+        top: '20px',
+        left: 0,
         width: '54px',
         height: '54px',
         marginRight: '24px',
@@ -81,11 +98,40 @@ function getAvatar(talents: Talent[], description: string): any {
 }
 
 /**
- * https://coolors.co/22223b-4a4e69-9a8c98-c9ada7-f2e9e4
+ * https://coolors.co/fffcf2-ccc5b9-403d39-252422-eb5e28
  */
 const TimelinePage: NextPage = () => {
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<VariableSizeList>(null);
+  const [containerRect, setContainerRect] = useState<DOMRect | null>(null);
   const [talents, setTalents] = useState<Talent[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
+  const [timelineItems, setTimelineItems] = useState<TimelineItem[]>([]);
+
+  const scrollToCurrent = () => {
+    if (!listRef.current || timelineItems.length === 0) {
+      return;
+    }
+
+    const now = Date.now();
+    const foundIndex = timelineItems.findIndex(v => {
+      if (v.itemType === 'event') {
+        return false;
+      }
+      return Date.parse(v.start) > now;
+    });
+    listRef.current.scrollToItem(foundIndex, 'start');
+  };
+
+  useEffect(() => {
+    if (!containerRef.current) {
+      return;
+    }
+    setContainerRect(containerRef.current.getBoundingClientRect());
+  }, [containerRef]);
 
   useEffect(() => {
     const getTalents = async (url: string): Promise<Talent[]> => {
@@ -124,125 +170,170 @@ const TimelinePage: NextPage = () => {
           url: json[1][7][3],
         };
       });
-      list.sort((a, b) => a.start - b.start);
+      list.sort((a, b) => Date.parse(a.start) - Date.parse(b.start));
       setEvents(list);
     })();
   }, []);
+
+  useEffect(() => {
+    if (events.length === 0 || talents.length === 0) {
+      return;
+    }
+
+    const ordered = events.reduce((acc, cur) => {
+      acc[cur.start] = acc[cur.start] ? [...acc[cur.start], cur] : [cur];
+      return acc;
+    }, {} as { [start: string]: Event[] });
+
+    const list: TimelineItem[] = [];
+    Object.entries(ordered).forEach(([start, events_], idx, arr) => {
+      list.push(getDateTime(start, arr[idx - 1] ? arr[idx - 1][0] : ''));
+      events_.forEach(event => list.push({ itemType: 'event', ...event }));
+    });
+    setTimelineItems(list);
+  }, [events, talents]);
+
+  useEffect(scrollToCurrent, [timelineItems]);
+
+  const timelineItem = (v: ListChildComponentProps) => {
+    const item = v.data[v.index];
+    if (item.itemType === 'full' || item.itemType === 'short') {
+      return (
+        <div style={v.style}>
+          <Container
+            maxWidth="sm"
+            style={{
+              display: 'flex',
+              height: '100%',
+              alignItems: 'center',
+              padding: '10px',
+              backgroundColor: '#252422',
+              borderRadius: '27.5px',
+              color: '#eb5e28',
+            }}
+          >
+            <ScheduleIcon fontSize="large" />
+            <Typography
+              variant="h5"
+              variantMapping={{ h5: 'h2' }}
+              style={{ paddingLeft: '10px' }}
+            >
+              {item.summary}
+            </Typography>
+          </Container>
+        </div>
+      );
+    }
+
+    return (
+      <div style={v.style}>
+        <Container
+          maxWidth="sm"
+          style={{ position: 'relative', display: 'flex', height: '100%' }}
+        >
+          <span
+            style={{
+              display: 'inline-box',
+              position: 'absolute',
+              top: 0,
+              left: '24px',
+              width: '8px',
+              height: '100%',
+              backgroundColor: '#252422',
+            }}
+          />
+          {getAvatar(talents, item.description)}
+          <Card
+            style={{
+              position: 'absolute',
+              top: '10px',
+              left: '72px',
+              width: 'calc(100% - 78px)',
+            }}
+          >
+            <ContainerDimensions>
+              {({ width }) => (
+                <>
+                  <CardHeader
+                    title={item.summary}
+                    titleTypographyProps={{
+                      variant: 'subtitle1',
+                      variantMapping: { subtitle1: 'h3' },
+                      style: {
+                        width: `${width - 32}px`,
+                        lineHeight: '1.2',
+                        overflow: 'hidden',
+                        whiteSpace: 'nowrap',
+                        textOverflow: 'ellipsis',
+                      },
+                    }}
+                    subheader={item.description.split(' / ')[0]}
+                    subheaderTypographyProps={{
+                      variant: 'subtitle2',
+                      style: { color: '#ccc5b9' },
+                    }}
+                    style={{
+                      backgroundColor: '#403d39',
+                      color: '#fffcf2',
+                    }}
+                  />
+                  <CardMedia
+                    component="iframe"
+                    src={`https://www.youtube.com/embed/${
+                      item.url.split('?v=')[1]
+                    }`}
+                    style={{
+                      height: `${Math.round((width * 9) / 16)}px`,
+                      border: 'none',
+                    }}
+                  />
+                </>
+              )}
+            </ContainerDimensions>
+          </Card>
+        </Container>
+      </div>
+    );
+  };
 
   return (
     <>
       <CssBaseline />
       <div
+        ref={containerRef}
         style={{
-          paddingTop: '40px',
-          paddingBottom: '40px',
-          backgroundColor: '#4a4e69',
-          color: '#f2e9e4',
+          height: '100vh',
+          backgroundColor: '#ccc5b9',
+          color: '#252422',
         }}
       >
-        <Container maxWidth="sm">
-          {events.length > 0 && talents.length > 0 && (
-            <dl style={{ margin: 0, padding: 0 }}>
-              {Object.entries(getTimeline(events)).map(
-                ([time, ev], idx, arr) => {
-                  return (
-                    <React.Fragment key={time}>
-                      <dt
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          padding: '10px',
-                          backgroundColor: '#22223b',
-                          borderRadius: '27.5px',
-                        }}
-                      >
-                        <ScheduleIcon fontSize="large" />
-                        <Typography
-                          variant="h5"
-                          variantMapping={{ h5: 'h2' }}
-                          style={{ paddingLeft: '10px' }}
-                        >
-                          {getDateTime(
-                            time,
-                            arr[idx - 1] ? arr[idx - 1][0] : '',
-                          )}
-                        </Typography>
-                      </dt>
-                      {ev.map((v, i, a) => (
-                        <dd
-                          key={v.uid}
-                          style={{
-                            position: 'relative',
-                            display: 'flex',
-                            marginLeft: 0,
-                            paddingTop: i === 0 ? '40px' : '20px',
-                            paddingBottom: i === a.length - 1 ? '40px' : '20px',
-                          }}
-                        >
-                          <span
-                            style={{
-                              display: 'inline-box',
-                              position: 'absolute',
-                              top: 0,
-                              left: '24px',
-                              width: '8px',
-                              height: '100%',
-                              backgroundColor: '#22223b',
-                            }}
-                          ></span>
-                          {getAvatar(talents, v.description)}
-                          <Card style={{ width: '480px' }}>
-                            <CardHeader
-                              title={v.summary}
-                              titleTypographyProps={{
-                                variant: 'subtitle1',
-                                variantMapping: { subtitle1: 'h3' },
-                                style: { lineHeight: '1.2' },
-                              }}
-                              subheader={v.description.split(' / ')[0]}
-                              subheaderTypographyProps={{
-                                variant: 'subtitle2',
-                              }}
-                              action={
-                                <IconButton
-                                  onClick={() => window.open(v.url, '_blank')}
-                                >
-                                  <YouTubeIcon fontSize="large" />
-                                </IconButton>
-                              }
-                              style={{
-                                backgroundColor: '#9a8c98',
-                                color: '#22223b',
-                              }}
-                            />
-                            <CardActionArea>
-                              <ContainerDimensions>
-                                {({ width }) => (
-                                  <CardMedia
-                                    image={`http://img.youtube.com/vi/${
-                                      v.url.split('?v=')[1]
-                                    }/hq720.jpg`}
-                                    title={v.summary}
-                                    style={{
-                                      height: `${Math.round(
-                                        (width * 9) / 16,
-                                      )}px`,
-                                    }}
-                                  />
-                                )}
-                              </ContainerDimensions>
-                            </CardActionArea>
-                          </Card>
-                        </dd>
-                      ))}
-                    </React.Fragment>
-                  );
-                },
-              )}
-            </dl>
-          )}
-        </Container>
+        {containerRect !== null && (
+          <VariableSizeList
+            ref={listRef}
+            overscanCount={3}
+            width={containerRect.width}
+            height={containerRect.height}
+            itemCount={timelineItems.length}
+            itemData={timelineItems}
+            itemSize={i => {
+              if (isXs) {
+                return timelineItems[i].itemType === 'event'
+                  ? Math.round(((containerRect.width - 78) * 9) / 16) + 95
+                  : 55;
+              }
+              return timelineItems[i].itemType === 'event' ? 390 : 55;
+            }}
+          >
+            {timelineItem}
+          </VariableSizeList>
+        )}
       </div>
+      <Fab
+        onClick={scrollToCurrent}
+        style={{ position: 'absolute', right: '20px', bottom: '20px' }}
+      >
+        <UpdateIcon />
+      </Fab>
     </>
   );
 };
