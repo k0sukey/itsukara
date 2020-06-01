@@ -162,6 +162,7 @@ const TimelinePage: NextPage = () => {
         ...(await getEvents('holodule.ics')),
       ].map(event => {
         const json = event.toJSON();
+        console.log(json);
         return {
           uid: json[1][0][3],
           start: json[1][3][3],
@@ -171,7 +172,10 @@ const TimelinePage: NextPage = () => {
           url: json[1][7][3],
         };
       });
-      list.sort((a, b) => Date.parse(a.start) - Date.parse(b.start));
+      list.sort(
+        (a, b) =>
+          Date.parse(`${a.start}+09:00`) - Date.parse(`${b.start}+09:00`),
+      );
       setEvents(list);
     })();
   }, []);
@@ -334,7 +338,13 @@ const TimelinePage: NextPage = () => {
       </div>
       <Fab
         onClick={scrollToCurrent}
-        style={{ position: 'absolute', right: '20px', bottom: '20px' }}
+        style={{
+          position: 'absolute',
+          right: '20px',
+          bottom: '20px',
+          backgroundColor: '#eb5e28',
+          color: '#252422',
+        }}
       >
         <UpdateIcon />
       </Fab>
