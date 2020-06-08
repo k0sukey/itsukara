@@ -133,7 +133,16 @@ function getAvatar(talents: Talent[], description: string): any {
           />
         </Badge>
       ) : (
-        <Avatar>{name.charAt(0)}</Avatar>
+        <Avatar
+          style={{
+            width: '48px',
+            height: '48px',
+            backgroundColor: '#f1faee',
+            color: '#403d39',
+          }}
+        >
+          {name.charAt(0)}
+        </Avatar>
       )}
     </Container>
   );
