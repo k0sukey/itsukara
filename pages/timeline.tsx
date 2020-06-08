@@ -15,6 +15,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
+import BlockIcon from '@material-ui/icons/Block';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import UpdateIcon from '@material-ui/icons/Update';
 
@@ -34,7 +35,7 @@ interface Event {
 }
 
 type TimelineItem = Event & {
-  itemType: 'full' | 'short' | 'event';
+  itemType: 'term' | 'full' | 'short' | 'event';
 };
 
 function getDateTime(curr: string, prev: string): TimelineItem {
@@ -66,7 +67,10 @@ function getDateTime(curr: string, prev: string): TimelineItem {
 
 function getAvatar(talents: Talent[], description: string): any {
   const name = description.split(' / ')[0];
-  const found = talents.find(v => v.name === name);
+  const found = talents.find(v => {
+    const regex = new RegExp(name);
+    return regex.test(v.name);
+  });
   return found ? (
     <Avatar
       alt={name}
@@ -77,7 +81,6 @@ function getAvatar(talents: Talent[], description: string): any {
         left: 0,
         width: '54px',
         height: '54px',
-        marginRight: '24px',
         backgroundColor: '#f1faee',
       }}
     />
@@ -89,7 +92,6 @@ function getAvatar(talents: Talent[], description: string): any {
         left: 0,
         width: '54px',
         height: '54px',
-        marginRight: '24px',
         backgroundColor: '#f1faee',
       }}
     >
@@ -194,13 +196,95 @@ const TimelinePage: NextPage = () => {
       list.push(getDateTime(start, arr[idx - 1] ? arr[idx - 1][0] : ''));
       events_.forEach(event => list.push({ itemType: 'event', ...event }));
     });
-    setTimelineItems(list);
+
+    setTimelineItems([
+      {
+        itemType: 'term',
+        uid: 'START',
+        start: '',
+        end: '',
+        summary: 'Start',
+        description: '',
+        url: '',
+      },
+      ...list,
+      {
+        itemType: 'term',
+        uid: 'END',
+        start: '',
+        end: '',
+        summary: 'End',
+        description: '',
+        url: '',
+      },
+    ]);
   }, [events, talents]);
 
   useEffect(scrollToCurrent, [timelineItems]);
 
   const timelineItem = (v: ListChildComponentProps) => {
     const item = v.data[v.index];
+
+    if (item.itemType === 'term') {
+      return (
+        <div style={v.style}>
+          <Container
+            maxWidth="sm"
+            style={{
+              position: 'relative',
+              display: 'flex',
+              height: '100%',
+              padding: 0,
+            }}
+          >
+            {item.uid === 'START' && (
+              <span
+                style={{
+                  display: 'inline-box',
+                  position: 'absolute',
+                  bottom: 0,
+                  left: '24px',
+                  width: '8px',
+                  height: '44px',
+                  backgroundColor: '#252422',
+                }}
+              />
+            )}
+            {item.uid === 'END' && (
+              <span
+                style={{
+                  display: 'inline-box',
+                  position: 'absolute',
+                  top: 0,
+                  left: '24px',
+                  width: '8px',
+                  height: '44px',
+                  backgroundColor: '#252422',
+                }}
+              />
+            )}
+            <Container
+              style={{
+                position: 'absolute',
+                top: '20px',
+                display: 'flex',
+                width: '54px',
+                height: '54px',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '10px',
+                backgroundColor: '#252422',
+                borderRadius: '50%',
+                color: '#eb5e28',
+              }}
+            >
+              <BlockIcon style={{ fontSize: '36px' }} />
+            </Container>
+          </Container>
+        </div>
+      );
+    }
+
     if (item.itemType === 'full' || item.itemType === 'short') {
       return (
         <div style={v.style}>
@@ -212,7 +296,7 @@ const TimelinePage: NextPage = () => {
               alignItems: 'center',
               padding: '10px',
               backgroundColor: '#252422',
-              borderRadius: '27.5px',
+              borderRadius: '24px',
               color: '#eb5e28',
             }}
           >
@@ -233,7 +317,12 @@ const TimelinePage: NextPage = () => {
       <div style={v.style}>
         <Container
           maxWidth="sm"
-          style={{ position: 'relative', display: 'flex', height: '100%' }}
+          style={{
+            position: 'relative',
+            display: 'flex',
+            height: '100%',
+            padding: 0,
+          }}
         >
           <span
             style={{
@@ -251,8 +340,8 @@ const TimelinePage: NextPage = () => {
             style={{
               position: 'absolute',
               top: '10px',
-              left: '72px',
-              width: 'calc(100% - 78px)',
+              right: '0px',
+              width: 'calc(100% - 66px)',
             }}
           >
             <ContainerDimensions>
@@ -283,6 +372,7 @@ const TimelinePage: NextPage = () => {
                   />
                   <CardMedia
                     component="iframe"
+                    allowFullScreen
                     src={`https://www.youtube.com/embed/${
                       item.url.split('?v=')[1]
                     }`}
@@ -303,6 +393,10 @@ const TimelinePage: NextPage = () => {
   return (
     <>
       <Head>
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1.0,viewport-fit=cover"
+        />
         <title>タイムライン</title>
       </Head>
       <CssBaseline />
@@ -323,12 +417,15 @@ const TimelinePage: NextPage = () => {
             itemCount={timelineItems.length}
             itemData={timelineItems}
             itemSize={i => {
+              if (timelineItems[i].itemType === 'term') {
+                return 88;
+              }
               if (isXs) {
                 return timelineItems[i].itemType === 'event'
                   ? Math.round(((containerRect.width - 78) * 9) / 16) + 95
-                  : 55;
+                  : 48;
               }
-              return timelineItems[i].itemType === 'event' ? 390 : 55;
+              return timelineItems[i].itemType === 'event' ? 390 : 48;
             }}
           >
             {timelineItem}
@@ -338,7 +435,7 @@ const TimelinePage: NextPage = () => {
       <Fab
         onClick={scrollToCurrent}
         style={{
-          position: 'absolute',
+          position: 'fixed',
           right: '20px',
           bottom: '20px',
           backgroundColor: '#eb5e28',
