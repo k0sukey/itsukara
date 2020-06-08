@@ -23,6 +23,7 @@ import Typography from '@material-ui/core/Typography';
 import CheckIcon from '@material-ui/icons/Check';
 import HelpIcon from '@material-ui/icons/Help';
 import ScheduleIcon from '@material-ui/icons/Schedule';
+import TimelineIcon from '@material-ui/icons/Timeline';
 import WarningIcon from '@material-ui/icons/Warning';
 import Skeleton from '@material-ui/lab/Skeleton';
 
@@ -209,6 +210,26 @@ const IndexPage: NextPage = () => {
                       primaryTypographyProps={{
                         color: 'textPrimary',
                         style: { fontSize: '0.85rem' },
+                      }}
+                    />
+                  </ListItem>
+                  <Divider light variant="inset" />
+                  <ListItem
+                    button
+                    component={Link}
+                    underline="none"
+                    href="/timeline"
+                  >
+                    <ListItemAvatar>
+                      <Avatar>
+                        <TimelineIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="タイムライン"
+                      primaryTypographyProps={{
+                        color: 'textPrimary',
+                        style: { fontSize: '1.05rem', fontWeight: 500 },
                       }}
                     />
                   </ListItem>
