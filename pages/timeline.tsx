@@ -486,6 +486,7 @@ const TimelinePage: NextPage = () => {
                       height: `${Math.round((width * 9) / 16)}px`,
                       backgroundColor: 'rgba(255, 252, 242, 0.9)',
                       color: '#252422',
+                      overflowX: 'hidden',
                       overflowY: 'scroll',
                     }}
                   >
