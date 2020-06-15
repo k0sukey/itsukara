@@ -11,6 +11,8 @@
     "calendar:holodule": "ts-node -P tsconfig.calendar.json utils/holodule.ts",
     "talent:nijisanji": "ts-node -P tsconfig.calendar.json utils/nijisanji.ts",
     "talent:hololive": "ts-node -P tsconfig.calendar.json utils/hololive.ts",
+    "talents": "ts-node -P tsconfig.calendar.json utils/talents.ts",
+    "timeline": "ts-node -P tsconfig.calendar.json utils/timeline.ts",
     "ical": "ts-node -P tsconfig.calendar.json utils/ical.ts",
     "dev": "next",
     "deploy": "npm run build:next && npm run export",

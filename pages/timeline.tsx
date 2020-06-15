@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import ical from 'ical.js';
 import unfetch from 'isomorphic-unfetch';
 import { NextPage } from 'next';
 import Head from 'next/head';
@@ -212,49 +211,17 @@ const TimelinePage: NextPage = () => {
   }, [containerRef]);
 
   useEffect(() => {
-    const getTalents = async (url: string, box: Box): Promise<Talent[]> => {
-      const response = await unfetch(url);
-      return JSON.parse(await response.text()).map((v: Talent) => ({
-        ...v,
-        box,
-      }));
-    };
-
     (async () => {
-      setTalents([
-        ...(await getTalents('nijisanji.json', 'nijisanji')),
-        ...(await getTalents('hololive.json', 'hololive')),
-      ]);
+      const response = await unfetch('talents.json');
+      const list = JSON.parse(await response.text());
+      setTalents(list);
     })();
   }, []);
 
   useEffect(() => {
-    const getEvents = async (url: string): Promise<ical.Component[]> => {
-      const response = await unfetch(url);
-      const parsed = ical.parse(await response.text());
-      const root = new ical.Component(parsed);
-      return root.getAllSubcomponents('vevent');
-    };
-
     (async () => {
-      const list = [
-        ...(await getEvents('itsukara.ics')),
-        ...(await getEvents('holodule.ics')),
-      ].map(event => {
-        const json = event.toJSON();
-        return {
-          uid: json[1][0][3],
-          start: json[1][3][3],
-          end: json[1][4][3],
-          summary: json[1][5][3],
-          description: json[1][6][3],
-          url: json[1][7][3],
-        };
-      });
-      list.sort(
-        (a, b) =>
-          Date.parse(`${a.start}+09:00`) - Date.parse(`${b.start}+09:00`),
-      );
+      const response = await unfetch('timeline.json');
+      const list = JSON.parse(await response.text());
       setEvents(list);
     })();
   }, []);

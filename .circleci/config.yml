@@ -21,6 +21,10 @@ jobs:
       - run:
           command: npm run calendar:holodule
       - run:
+          command: npm run timeline
+      - run:
+          command: npm run talents
+      - run:
           command: npm run deploy
       - run:
           command: npx netlify deploy --prod --site ${NETLIFY_APP_ID} --auth ${NETLIFY_ACCESS_TOKEN}
@@ -45,6 +49,10 @@ jobs:
       - run:
           command: npm run calendar:holodule
       - run:
+          command: npm run timeline
+      - run:
+          command: npm run talents
+      - run:
           command: npm run deploy
       - run:
           command: npx netlify deploy --prod --site ${NETLIFY_APP_ID} --auth ${NETLIFY_ACCESS_TOKEN}
@@ -56,7 +64,7 @@ workflows:
   hourly:
     triggers:
       - schedule:
-          cron: "0 * * * *"
+          cron: '0 * * * *'
           filters:
             branches:
               only:
