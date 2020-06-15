@@ -36,6 +36,19 @@ interface Response {
       };
     });
 
+  talents.push({
+    name: 'アキロゼ',
+    thumbnail:
+      'https://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_1000,w_500,f_auto,q_auto/1369026/754557_771352.png',
+    channelId: 'UCLbtM3JZfRTg8v2KGag-RMw',
+  });
+  talents.push({
+    name: '癒月ちょこSub',
+    thumbnail:
+      'https://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_1000,w_500,f_auto,q_auto/1369026/945730_248174.png',
+    channelId: 'UCp3tgHXw_HI0QMk1K8qh3gQ',
+  });
+
   await fs.writeFileSync(
     path.join('utils', 'hololive.json'),
     JSON.stringify(talents),

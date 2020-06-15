@@ -1,22 +1,32 @@
+import clsx from 'clsx';
 import ical from 'ical.js';
 import unfetch from 'isomorphic-unfetch';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import ContainerDimensions from 'react-container-dimensions';
 import { ListChildComponentProps, VariableSizeList } from 'react-window';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
+import {
+  createStyles,
+  makeStyles,
+  useTheme,
+  Theme,
+} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
+import Collapse from '@material-ui/core/Collapse';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Fab from '@material-ui/core/Fab';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import BlockIcon from '@material-ui/icons/Block';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import UpdateIcon from '@material-ui/icons/Update';
 
@@ -148,12 +158,28 @@ function getAvatar(talents: Talent[], description: string): any {
   );
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)',
+    },
+  }),
+);
+
 /**
  * https://coolors.co/fffcf2-ccc5b9-403d39-252422-eb5e28
  */
 const TimelinePage: NextPage = () => {
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
+  const classes = useStyles();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<VariableSizeList>(null);
@@ -161,6 +187,7 @@ const TimelinePage: NextPage = () => {
   const [talents, setTalents] = useState<Talent[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [timelineItems, setTimelineItems] = useState<TimelineItem[]>([]);
+  const [expanded, setExpanded] = useState<string>('');
 
   const scrollToCurrent = () => {
     if (!listRef.current || timelineItems.length === 0) {
@@ -273,7 +300,11 @@ const TimelinePage: NextPage = () => {
 
   useEffect(scrollToCurrent, [timelineItems]);
 
-  const timelineItem = (v: ListChildComponentProps) => {
+  const handleExpand = (uid: string) => {
+    setExpanded(expanded !== uid ? uid : '');
+  };
+
+  const timelineItem = memo((v: ListChildComponentProps) => {
     const item = v.data[v.index];
 
     if (item.itemType === 'term') {
@@ -404,7 +435,7 @@ const TimelinePage: NextPage = () => {
                       variant: 'subtitle1',
                       variantMapping: { subtitle1: 'h3' },
                       style: {
-                        width: `${width - 32}px`,
+                        width: `${width - 32 - 48}px`,
                         lineHeight: '1.2',
                         overflow: 'hidden',
                         whiteSpace: 'nowrap',
@@ -420,6 +451,18 @@ const TimelinePage: NextPage = () => {
                       backgroundColor: '#403d39',
                       color: '#fffcf2',
                     }}
+                    action={
+                      <IconButton
+                        className={clsx(classes.expand, {
+                          [classes.expandOpen]: expanded === item.uid,
+                        })}
+                        onClick={() => {
+                          handleExpand(item.uid);
+                        }}
+                      >
+                        <ExpandMoreIcon style={{ color: '#fffcf2' }} />
+                      </IconButton>
+                    }
                   />
                   <CardMedia
                     component="iframe"
@@ -432,6 +475,34 @@ const TimelinePage: NextPage = () => {
                       border: 'none',
                     }}
                   />
+                  <Collapse
+                    in={expanded === item.uid}
+                    timeout="auto"
+                    unmountOnExit
+                    style={{
+                      position: 'absolute',
+                      top: '72px',
+                      width,
+                      height: `${Math.round((width * 9) / 16)}px`,
+                      backgroundColor: 'rgba(255, 252, 242, 0.9)',
+                      color: '#252422',
+                      overflowY: 'scroll',
+                    }}
+                  >
+                    <CardContent>
+                      <pre
+                        style={{
+                          margin: 0,
+                          fontFamily:
+                            '"Roboto", "Helvetica", "Arial", sans-serif',
+                          fontSize: '1rem',
+                          whiteSpace: 'pre-wrap',
+                        }}
+                      >
+                        {item.description}
+                      </pre>
+                    </CardContent>
+                  </Collapse>
                 </>
               )}
             </ContainerDimensions>
@@ -439,7 +510,7 @@ const TimelinePage: NextPage = () => {
         </Container>
       </div>
     );
-  };
+  });
 
   return (
     <>
