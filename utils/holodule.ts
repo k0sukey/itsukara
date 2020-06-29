@@ -136,20 +136,17 @@ interface Event {
     const checker = await page
       .evaluate(() => (window as any).ytInitialPlayerResponse)
       .catch(e => {
-        console.error(e);
         console.timeEnd(label);
+        console.error(e);
       });
-    if (
-      checker.playabilityStatus.status !== 'UNPLAYABLE' &&
-      checker.playabilityStatus.status !== 'ERROR'
-    ) {
+    if (checker.playabilityStatus.status === 'OK') {
       const json = await page
         .evaluate(() =>
           JSON.parse((window as any).ytplayer.config.args.player_response),
         )
         .catch(e => {
-          console.error(e);
           console.timeEnd(label);
+          console.error(e);
         });
       const summary = json.videoDetails.title;
       const description = json.videoDetails.shortDescription;
@@ -161,7 +158,8 @@ interface Event {
         summary: `${checker.videoDetails.title}`,
         description: `${checker.videoDetails.shortDescription}`,
       });
-      console.error(`${label}: ${checker.playabilityStatus.reason}`);
+      console.timeEnd(label);
+      console.error(checker.playabilityStatus.reason);
     }
   }
 
