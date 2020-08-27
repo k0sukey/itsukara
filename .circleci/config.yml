@@ -11,6 +11,7 @@ jobs:
       - restore_cache:
           key: dependencies-{{ checksum "package.json" }}
       - run:
+          name: for Puppeteer
           command: sudo apt-get install -yq libxss1
       - run:
           command: npm i
@@ -40,6 +41,9 @@ jobs:
       - checkout
       - restore_cache:
           key: dependencies-{{ checksum "package.json" }}
+      - run:
+          name: for Puppeteer
+          command: sudo apt-get install -yq libxss1
       - run:
           command: npm i
       - save_cache:
