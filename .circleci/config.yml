@@ -11,6 +11,8 @@ jobs:
       - restore_cache:
           key: dependencies-{{ checksum "package.json" }}
       - run:
+          command: sudo apt-get install -yq libxss1
+      - run:
           command: npm i
       - save_cache:
           key: dependencies-{{ checksum "package.json" }}
