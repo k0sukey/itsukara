@@ -20,6 +20,25 @@ interface Response {
   };
 }
 
+function normalizeName(name: string): string {
+  if (name === '森美声/もりかりおぺ') {
+    return 'Calli';
+  }
+  if (name === '小鳥遊キアラ/たかなしきあら') {
+    return 'Kiara';
+  }
+  if (name === '一伊那尓栖/にのまえいなにす') {
+    return 'Ina';
+  }
+  if (name === 'がうる・ぐら') {
+    return 'Gura';
+  }
+  if (name === 'ワトソン・アメリア') {
+    return 'Amelia';
+  }
+  return name;
+}
+
 (async () => {
   const response = await unfetch(
     'https://www.hololive.tv/r/v1/sites/11822129/portfolio/products?per=100',
@@ -30,7 +49,7 @@ interface Response {
     .map(product => {
       const parsed = URLParse(product.button.url);
       return {
-        name: product.name,
+        name: normalizeName(product.name),
         thumbnail: product.picture[0].thumbnailUrl,
         channelId: parsed.pathname.replace('/channel/', '').replace(/\/$/, ''),
       };
