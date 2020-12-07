@@ -36,6 +36,15 @@ function normalizeName(name: string): string {
   if (name === 'ワトソン・アメリア') {
     return 'Amelia';
   }
+  if (name === 'Kureiji Ollie / クレイジー・オリー') {
+    return 'Ollie';
+  }
+  if (name === 'Anya Melfissa / アーニャ・メルフィッサ') {
+    return 'Anya';
+  }
+  if (name === 'Pavolia Reine / パヴォリア・レイネ') {
+    return 'Reine';
+  }
   return name;
 }
 
