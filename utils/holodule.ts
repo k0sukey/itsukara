@@ -141,8 +141,8 @@ interface Event {
       });
     if (checker.playabilityStatus.status === 'OK') {
       const json = await page
-        .evaluate(() =>
-          JSON.parse((window as any).ytplayer.config.args.player_response),
+        .evaluate(
+          () => (window as any).ytplayer.config.args.raw_player_response,
         )
         .catch(e => {
           console.timeEnd(label);
