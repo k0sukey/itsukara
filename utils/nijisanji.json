@@ -15,6 +15,11 @@
     "channelId": "UCBi8YaVyZpiKWN3_Z0dCTfQ"
   },
   {
+    "name": "アクシア・クローネ",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Axia_Krone.png",
+    "channelId": "UC8oPnditPSp5lZu45fnXWCA"
+  },
+  {
     "name": "朝日南アカネ",
     "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Akane_Asahina.png",
     "channelId": "UCe_p3YEuYJb8Np0Ip9dk-FQ"
@@ -26,7 +31,7 @@
   },
   {
     "name": "安土桃",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Aduchi_Momo.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Momo_Aduchi.png",
     "channelId": "UC6TfqY40Xt1Y0J-N18c85qQ"
   },
   {
@@ -46,7 +51,7 @@
   },
   {
     "name": "アンジュ・カトリーナ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Ange_Katrina.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Ange_Katrina_210830.png",
     "channelId": "UCHVXbQzkl3rDfsXWo8xi2qw"
   },
   {
@@ -55,18 +60,13 @@
     "channelId": "UC_GCs6GARLxEHxy1w40d6VQ"
   },
   {
-    "name": "出雲霞",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Kasumi_Izumo_20200901.png",
-    "channelId": "UCLpYMk5h1bq8_GAFVBgXhPQ"
-  },
-  {
     "name": "戌亥とこ",
     "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Inui_Toko.png",
     "channelId": "UCXRlIK3Cw_TJIQC5kSJJQMg"
   },
   {
     "name": "イブラヒム",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Ibrahim.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Ibrahim_20210419.png",
     "channelId": "UCmZ1Rbthn-6Jm_qOGjYsh5A"
   },
   {
@@ -96,18 +96,18 @@
   },
   {
     "name": "える",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Elu.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Elu_20210217.png",
     "channelId": "UCYKP16oMX9KKPbrNgo_Kgag"
-  },
-  {
-    "name": "御伽原江良",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Otogibara_Era.png",
-    "channelId": "UCwQ9Uv-m8xkE5PzRc7Bqx3Q"
   },
   {
     "name": "小野町春香",
     "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Haruka_Onomachi_20200904.png",
     "channelId": "UCg63a3lk6PNeWhVvMRM_mrQ"
+  },
+  {
+    "name": "オリバー・エバンス",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Oliver_Evans.png",
+    "channelId": "UCqjTqdVlvIipZXIKeCkHKUA"
   },
   {
     "name": "甲斐田晴",
@@ -121,7 +121,7 @@
   },
   {
     "name": "語部紡",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Kataribe_Tumugu.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Tsumugu_Kataribe_20201015.png",
     "channelId": "UCufQu4q65z63IgE4cfKs1BQ"
   },
   {
@@ -136,13 +136,8 @@
   },
   {
     "name": "北小路ヒスイ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Hisui_Kitakoji.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Hisui_Kitakoji_20210310.png",
     "channelId": "UCRqBKoKuX30ruKAq05pCeRQ"
-  },
-  {
-    "name": "金魚坂めいろ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Meiro_Kingyozaka_20200713.png",
-    "channelId": "UC69URn8iP4u8D_zUp-IJ1sg"
   },
   {
     "name": "ギルザレンIII世",
@@ -156,7 +151,7 @@
   },
   {
     "name": "来栖夏芽",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Natsume_Kurusu.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Natsume_Kurusu_211227.png",
     "channelId": "UCRcLAVTbmx2-iNcXSsupdNA"
   },
   {
@@ -166,12 +161,12 @@
   },
   {
     "name": "グウェル・オス・ガール",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Gwelu_Os_Gar.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Gwelu_Os_Gar_20210107.png",
     "channelId": "UC1QgXt46-GEvtNjEC1paHnw"
   },
   {
     "name": "郡道美玲",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Gundou_Mirei.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Mirei_Gundou_20210323.png",
     "channelId": "UCeShTCVgZyq2lsBW9QwIJcw"
   },
   {
@@ -181,7 +176,7 @@
   },
   {
     "name": "弦月藤士郎",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Tojiro_Genzuki.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Tojiro_Genzuki_211008.png",
     "channelId": "UCGw7lrT-rVZCWHfdG9Frcgg"
   },
   {
@@ -196,12 +191,12 @@
   },
   {
     "name": "笹木咲",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Saku_Sasaki_200601.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Saku_Sasaki_20201116.png",
     "channelId": "UCoztvTULBYd3WmStqYeoHcA"
   },
   {
     "name": "椎名唯華",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Yuika_Shiina_200309.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Yuika_Shiina_20210401.png",
     "channelId": "UC_4tXjqecqox5Uc05ncxpxg"
   },
   {
@@ -211,7 +206,7 @@
   },
   {
     "name": "シスター・クレア",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Sister_Claire_200309.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Sister_Claire_210913.png",
     "channelId": "UC1zFJrfEKvCixhsjNSb1toQ"
   },
   {
@@ -246,18 +241,13 @@
   },
   {
     "name": "鈴鹿詩子",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Suzuka_Utako.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Utako_Suzuka_210416.png",
     "channelId": "UCwokZsOK_uEre70XayaFnzA"
   },
   {
     "name": "鈴木勝",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Masaru_Suzuki200121.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Masaru_Suzuki_20210601.png",
     "channelId": "UCryOPk2GZ1meIDt53tL30Tw"
-  },
-  {
-    "name": "鈴原るる",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Suzuhara_Lulu.png",
-    "channelId": "UC_a1ZYZ8ZTXpjg9xUY9sj8w"
   },
   {
     "name": "鈴谷アキ",
@@ -266,22 +256,22 @@
   },
   {
     "name": "瀬戸美夜子",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Seto_Miyako.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Miyako_Seto_20210526.png",
     "channelId": "UCHK5wkevfaGrPr7j3g56Jmw"
   },
   {
     "name": "空星きらめ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Kirame_Sorahoshi.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Kirame_Sorahoshi_210823.png",
     "channelId": "UC_82HBGtvwN1hcGeOGHzUBQ"
   },
   {
     "name": "鷹宮リオン",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Rion_Takamiya_200626.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Rion_Takamiya_211216.png",
     "channelId": "UCV5ZZlLjk5MKGg3L0n0vbzw"
   },
   {
     "name": "月ノ美兎",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Tsukino_Mito.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Mito_Tsukino_20200923.png",
     "channelId": "UCD-miitqNY3nyukJ4Fnf4_A"
   },
   {
@@ -296,12 +286,12 @@
   },
   {
     "name": "轟京子",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Todoroki_Kyouko.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Kyoko_Todoroki_211104.png",
     "channelId": "UCRV9d6YCYIMUszK-83TwxVA"
   },
   {
     "name": "ドーラ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Dola.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Dola_210726.png",
     "channelId": "UC53UDnhAAYwvNO7j_2Ju1cQ"
   },
   {
@@ -311,17 +301,17 @@
   },
   {
     "name": "奈羅花",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Naraka.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Naraka_20201030.png",
     "channelId": "UC-o-E6I3IC2q8sAoAuM6Umg"
   },
   {
     "name": "成瀬鳴",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Naru_Naruse_20200821.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Naru_Naruse.png",
     "channelId": "UCoM_XmK45j504hfUWvN06Qg"
   },
   {
     "name": "西園チグサ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Chigusa_Nishizono.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Chigusa_Nishizono_211028.png",
     "channelId": "UCkngxfPbmGyGl_RIq4FA3MQ"
   },
   {
@@ -346,7 +336,7 @@
   },
   {
     "name": "葉山舞鈴",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Marin_Hayama_200306.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Marin_Hayama_20201223.png",
     "channelId": "UCfipDDn7wY-C-SoUChgxCQQ"
   },
   {
@@ -356,7 +346,7 @@
   },
   {
     "name": "樋口楓",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Higuchi_Kaede.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Kaede_Higuchi_20201116.png",
     "channelId": "UCsg-YqdqQ-KFF0LNk23BY4A"
   },
   {
@@ -366,7 +356,7 @@
   },
   {
     "name": "フミ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Fumi_20200727.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Fumi_210719.png",
     "channelId": "UCwrjITPwG4q71HzihV2C7Nw"
   },
   {
@@ -381,7 +371,7 @@
   },
   {
     "name": "不破湊",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Minato_Fuwa_20191128.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Minato_Fuwa_20200127.png",
     "channelId": "UC6wvdADTJ88OfIbJYIpAaDA"
   },
   {
@@ -396,7 +386,7 @@
   },
   {
     "name": "本間ひまわり",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Honma_Himawari.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Himawari_Honma_210716.png",
     "channelId": "UC0g1AE0DOjBYnLhkgoRWN1w"
   },
   {
@@ -406,7 +396,7 @@
   },
   {
     "name": "魔界ノりりむ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Ririmu_Maiakno.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Ririmu_Maiakno_210615.png",
     "channelId": "UC9EjSJ8pvxtvPdxLOElv73w"
   },
   {
@@ -421,7 +411,7 @@
   },
   {
     "name": "魔使マオ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Mao_Matsukai.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Mao_Matsukai_20200202.png",
     "channelId": "UCerkculBD7YLc_vOGrF7tKg"
   },
   {
@@ -431,17 +421,17 @@
   },
   {
     "name": "メリッサ・キンレンカ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Melissa_Kinrenka.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Melissa_Kinrenka_20200202.png",
     "channelId": "UCwcyyxn6h9ex4sMXGtpQE_g"
   },
   {
     "name": "モイラ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Moira.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Moira_20201118.png",
     "channelId": "UCvmppcdYf4HOv-tFQhHHJMA"
   },
   {
     "name": "物述有栖",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Mononobe_Arisu.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Alice_Mononobe_20201118.png",
     "channelId": "UCt0clH12Xk1-Ej5PXKGfdPA"
   },
   {
@@ -461,7 +451,7 @@
   },
   {
     "name": "山神カルタ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Karuta_Yamagami.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Karuta_Yamagami_211025.png",
     "channelId": "UCllKI7VjyANuS1RXatizfLQ"
   },
   {
@@ -471,12 +461,12 @@
   },
   {
     "name": "夕陽リリ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Yuuhi_Riri.png",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Riri_Yuuhi_210906.png",
     "channelId": "UC48jH1ul-6HOrcSSfoR02fQ"
   },
   {
     "name": "雪城眞尋",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Yukishiro_Mahiro.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Mahiro_Yukishiro_20200928.png",
     "channelId": "UCHX7YpFG8rVwhsHCx34xt7w"
   },
   {
@@ -491,12 +481,12 @@
   },
   {
     "name": "夜見れな",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Rena_Yorumi_200626.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Rena_Yorumi_20210319.png",
     "channelId": "UCL34fAoFim9oHLbVzMKFavQ"
   },
   {
     "name": "ラトナ・プティ",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Ratna_Petit_200630.png",
+    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Ratna_Petit_20201116.png",
     "channelId": "UCIG9rDtgR45VCZmYnd-4DUw"
   },
   {
@@ -506,7 +496,7 @@
   },
   {
     "name": "緑仙",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Ryushen_200507.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Ryushen_210409.png",
     "channelId": "UCt5-0i4AVHXaWJrL8Wql3mw"
   },
   {
@@ -516,13 +506,28 @@
   },
   {
     "name": "ルイス・キャミー",
-    "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Luis_Cammy.png",
+    "thumbnail": "https://liver-icons.s3-ap-northeast-1.amazonaws.com/400x400/Luis_Cammy_20210329.png",
     "channelId": "UCb6ObE-XGCctO3WrjRZC-cw"
+  },
+  {
+    "name": "レイン・パターソン",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Lain_Paterson.png",
+    "channelId": "UCRm6lqtdxs_Qo6HeL-SRQ-w"
+  },
+  {
+    "name": "レオス・ヴィンセント",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Leos_Vincent.png",
+    "channelId": "UC-6rZgmxZSIbq786j3RD5ow"
   },
   {
     "name": "レヴィ・エリファ",
     "thumbnail": "https://s3-ap-northeast-1.amazonaws.com/liver-icons/400x400/Levi+Elipha.png",
     "channelId": "UCtnO2N4kPTXmyvedjGWdx3Q"
+  },
+  {
+    "name": "ローレン・イロアス",
+    "thumbnail": "https://liver-icons.s3.ap-northeast-1.amazonaws.com/400x400/Lauren_Iroas.png",
+    "channelId": "UCgmFrRcyH7d1zR9sIVQhFow"
   },
   {
     "name": "童田明治",

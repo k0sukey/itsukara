@@ -107,7 +107,10 @@ interface Event {
 
   const events: Event[] = [];
   for (let i = 0; i < _events.length; i++) {
-    if (!/^https:\/\/www\.youtube\.com\/.+/.test(_events[i].url)) {
+    if (
+      !/^https:\/\/www\.youtube\.com\/.+/.test(_events[i].url) &&
+      !/^https:\/\/youtu\.be\/.+/.test(_events[i].url)
+    ) {
       console.info(`ignore ${_events[i].url}`);
       continue;
     }

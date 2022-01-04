@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:latest-browsers
+      - image: cimg/node:12.22-browsers
         environment:
           TZ: Asia/Tokyo
           NODE_ENV: development
@@ -33,7 +33,7 @@ jobs:
           command: npx netlify deploy --prod --site ${NETLIFY_APP_ID} --auth ${NETLIFY_ACCESS_TOKEN}
   calendar:
     docker:
-      - image: circleci/node:latest-browsers
+      - image: cimg/node:12.22-browsers
         environment:
           TZ: Asia/Tokyo
           NODE_ENV: development
