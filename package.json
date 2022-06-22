@@ -63,7 +63,7 @@
     "@types/react-youtube": "^7.6.2",
     "@types/rimraf": "^2.0.4",
     "@types/url-parse": "^1.4.3",
-    "got": "^10.7.0",
+    "got": "^11.8.5",
     "ical-generator": "^1.15.0",
     "mkdirp": "^0.5.5",
     "netlify-cli": "^2.59.1",
